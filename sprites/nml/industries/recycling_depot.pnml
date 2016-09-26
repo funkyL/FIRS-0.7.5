@@ -143,7 +143,6 @@ item(FEAT_INDUSTRIES, recycling_depot, IND_RECYCLINGDEPOT_ID) {
 	graphics {
 		produce_256_ticks:       THIS_ID(produce);
 		construction_probability:THIS_ID(check_availability);
-		location_check:          THIS_ID(check_location);
 		monthly_prod_change:     THIS_ID(check_production_level);
 		random_prod_change:      THIS_ID(check_closure);
 		extra_text_industry:     return string(STR_EXTRA_RECYCLING_DEPOT);
