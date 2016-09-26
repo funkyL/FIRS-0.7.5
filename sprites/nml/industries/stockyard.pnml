@@ -181,10 +181,10 @@ tilelayout tilelayout_stockyard_1 {
 /* availability years - also update available from strings if changing these */
 
 
-CHECK_INCOMPATIBLE  (stockyard,     56, CB_RESULT_LOCATION_DISALLOW, return CB_RESULT_LOCATION_ALLOW)
-CHECK_INCOMPATIBLE  (dairy_farm,    16, CB_RESULT_LOCATION_DISALLOW, THIS_ID(stockyard))
-CHECK_INCOMPATIBLE  (sheep_farm,    16, CB_RESULT_LOCATION_DISALLOW, THIS_ID(dairy_farm))
-CHECK_INCOMPATIBLE  (mixed_farm,    16, CB_RESULT_LOCATION_DISALLOW, THIS_ID(sheep_farm))
+CHECK_INCOMPATIBLE  (stockyard,     1, CB_RESULT_LOCATION_DISALLOW, return CB_RESULT_LOCATION_ALLOW)
+CHECK_INCOMPATIBLE  (dairy_farm,    0, CB_RESULT_LOCATION_DISALLOW, THIS_ID(stockyard))
+CHECK_INCOMPATIBLE  (sheep_farm,    0, CB_RESULT_LOCATION_DISALLOW, THIS_ID(dairy_farm))
+CHECK_INCOMPATIBLE  (mixed_farm,    0, CB_RESULT_LOCATION_DISALLOW, THIS_ID(sheep_farm))
 CHECK_FOUNDER       (THIS_ID(mixed_farm))
 
 SWITCH_COLOUR_SCHEME1(THIS_ID(colour))

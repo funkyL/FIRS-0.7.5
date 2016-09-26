@@ -24847,9 +24847,9 @@ tilelayout tilelayout_grain_mill_6 {
 /* extra text template */
 
 
-switch (FEAT_INDUSTRIES, SELF, grain_millgrain_mill, industry_distance(grain_mill)) { 0 .. 56: return CB_RESULT_LOCATION_DISALLOW; return CB_RESULT_LOCATION_ALLOW; }
-switch (FEAT_INDUSTRIES, SELF, grain_millbrewery, industry_distance(brewery)) { 0 .. 16: return CB_RESULT_LOCATION_DISALLOW; grain_millgrain_mill; }
-switch (FEAT_INDUSTRIES, SELF, grain_millarable_farm, industry_distance(arable_farm)) { 0 .. 16: return CB_RESULT_LOCATION_DISALLOW; grain_millbrewery; }
+switch (FEAT_INDUSTRIES, SELF, grain_millgrain_mill, industry_distance(grain_mill)) { 0 .. 1: return CB_RESULT_LOCATION_DISALLOW; return CB_RESULT_LOCATION_ALLOW; }
+switch (FEAT_INDUSTRIES, SELF, grain_millbrewery, industry_distance(brewery)) { 0 .. 1: return CB_RESULT_LOCATION_DISALLOW; grain_millgrain_mill; }
+switch (FEAT_INDUSTRIES, SELF, grain_millarable_farm, industry_distance(arable_farm)) { 0 .. 1: return CB_RESULT_LOCATION_DISALLOW; grain_millbrewery; }
 switch (FEAT_INDUSTRIES, SELF, grain_milltown_distance, town_euclidean_dist(0, 0)) { 0 .. 144: grain_millarable_farm; return CB_RESULT_LOCATION_DISALLOW; }
 switch (FEAT_INDUSTRIES, SELF, grain_millcheck_location, ( (extra_callback_info2 == IND_CREATION_FUND) || (extra_callback_info2 == IND_CREATION_PROSPECT) ) ) { 1: return CB_RESULT_LOCATION_ALLOW; grain_milltown_distance; }
 
@@ -35105,7 +35105,7 @@ tilelayout tilelayout_recycling_depot_1 {
 /* availability years - also update available from strings if changing these */
 
 
-switch (FEAT_INDUSTRIES, SELF, recycling_depotrecycling_plant, industry_distance(recycling_plant)) { 0 .. 16: return CB_RESULT_LOCATION_DISALLOW; return CB_RESULT_LOCATION_ALLOW; }
+switch (FEAT_INDUSTRIES, SELF, recycling_depotrecycling_plant, industry_distance(recycling_plant)) { 0 .. 1: return CB_RESULT_LOCATION_DISALLOW; return CB_RESULT_LOCATION_ALLOW; }
 switch (FEAT_INDUSTRIES, SELF, recycling_depotrecycling_depot, industry_distance(recycling_depot)) { 0 .. 20: return CB_RESULT_LOCATION_DISALLOW; recycling_depotrecycling_plant; }
 switch (FEAT_INDUSTRIES, SELF, recycling_depotcheck_location, industry_town_count(recycling_depot)) { 0 .. 0: recycling_depotrecycling_depot; return string(STR_ERR_LOCATION_LIMIT_1_PER_TOWN); }
 /* Don't use founder check for this industry, there is a hard limit of 1 per town irrespective of funding type */
@@ -37044,10 +37044,10 @@ tilelayout tilelayout_stockyard_1 {
 /* availability years - also update available from strings if changing these */
 
 
-switch (FEAT_INDUSTRIES, SELF, stockyardstockyard, industry_distance(stockyard)) { 0 .. 56: return CB_RESULT_LOCATION_DISALLOW; return CB_RESULT_LOCATION_ALLOW; }
-switch (FEAT_INDUSTRIES, SELF, stockyarddairy_farm, industry_distance(dairy_farm)) { 0 .. 16: return CB_RESULT_LOCATION_DISALLOW; stockyardstockyard; }
-switch (FEAT_INDUSTRIES, SELF, stockyardsheep_farm, industry_distance(sheep_farm)) { 0 .. 16: return CB_RESULT_LOCATION_DISALLOW; stockyarddairy_farm; }
-switch (FEAT_INDUSTRIES, SELF, stockyardmixed_farm, industry_distance(mixed_farm)) { 0 .. 16: return CB_RESULT_LOCATION_DISALLOW; stockyardsheep_farm; }
+switch (FEAT_INDUSTRIES, SELF, stockyardstockyard, industry_distance(stockyard)) { 0 .. 1: return CB_RESULT_LOCATION_DISALLOW; return CB_RESULT_LOCATION_ALLOW; }
+switch (FEAT_INDUSTRIES, SELF, stockyarddairy_farm, industry_distance(dairy_farm)) { 0 .. 0: return CB_RESULT_LOCATION_DISALLOW; stockyardstockyard; }
+switch (FEAT_INDUSTRIES, SELF, stockyardsheep_farm, industry_distance(sheep_farm)) { 0 .. 0: return CB_RESULT_LOCATION_DISALLOW; stockyarddairy_farm; }
+switch (FEAT_INDUSTRIES, SELF, stockyardmixed_farm, industry_distance(mixed_farm)) { 0 .. 0: return CB_RESULT_LOCATION_DISALLOW; stockyardsheep_farm; }
 switch (FEAT_INDUSTRIES, SELF, stockyardcheck_location, ( (extra_callback_info2 == IND_CREATION_FUND) || (extra_callback_info2 == IND_CREATION_PROSPECT) ) ) { 1: return CB_RESULT_LOCATION_ALLOW; stockyardmixed_farm; }
 
 switch(FEAT_INDUSTRIES, SELF, stockyardcolour, colour) { 0: return 0; 1: return 1; 2: return 2; 3: return 13; 4: return 2; 5: return 5; 6: return 1; 7: return 1; 8: return 0; 9: return 14; 10: return 10; 11: return 11; 12: return 13; 13: return 13; 14: return 14; 15: return 14; return 0; }

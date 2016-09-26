@@ -291,9 +291,9 @@ tilelayout tilelayout_grain_mill_6 {
 /* extra text template */
 #define THIS_STR_EXTRA_TEXT       STR_EXTRA_GRAIN_MILL
 
-CHECK_INCOMPATIBLE  (grain_mill,    56, CB_RESULT_LOCATION_DISALLOW, return CB_RESULT_LOCATION_ALLOW)
-CHECK_INCOMPATIBLE  (brewery,       16, CB_RESULT_LOCATION_DISALLOW, THIS_ID(grain_mill))
-CHECK_INCOMPATIBLE  (arable_farm,   16, CB_RESULT_LOCATION_DISALLOW, THIS_ID(brewery))
+CHECK_INCOMPATIBLE  (grain_mill,    1, CB_RESULT_LOCATION_DISALLOW, return CB_RESULT_LOCATION_ALLOW)
+CHECK_INCOMPATIBLE  (brewery,       1, CB_RESULT_LOCATION_DISALLOW, THIS_ID(grain_mill))
+CHECK_INCOMPATIBLE  (arable_farm,   1, CB_RESULT_LOCATION_DISALLOW, THIS_ID(brewery))
 CHECK_TOWN_DISTANCE (town_distance,  0,144, THIS_ID(arable_farm))
 CHECK_FOUNDER       (THIS_ID(town_distance))
 
