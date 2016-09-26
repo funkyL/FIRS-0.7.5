@@ -61,7 +61,7 @@ switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(tile1_layout1_road_check),
 			nearby_tile_class( 1,  1) == TILE_CLASS_ROAD
 			) ) {
 	1: return CB_RESULT_LOCATION_ALLOW;
-	return CB_RESULT_LOCATION_DISALLOW;
+	return CB_RESULT_LOCATION_ALLOW;
 }
 switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(tile1_layout2_road_check),
 			(
@@ -73,12 +73,12 @@ switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(tile1_layout2_road_check),
 			nearby_tile_class( 2,  0) == TILE_CLASS_ROAD
 			) ) {
 	1: return CB_RESULT_LOCATION_ALLOW;
-	return CB_RESULT_LOCATION_DISALLOW;
+	return CB_RESULT_LOCATION_ALLOW;
 }
 switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(tile1_layout_check), (extra_callback_info2 & 255)) {
 	0: THIS_ID(tile1_layout1_road_check);
 	1: THIS_ID(tile1_layout2_road_check);
-	return CB_RESULT_LOCATION_DISALLOW;
+	return CB_RESULT_LOCATION_ALLOW;
 }
 
 TILE_ALLOW_PLAYER         (tile1_player_check,                                      THIS_ID(tile1_layout_check))
@@ -116,11 +116,6 @@ tilelayout tilelayout_petrol_pump_2 {
 
 #include "../templates/check_availability.pnml"
 
-CHECK_INCOMPATIBLE  (hotel, 16, CB_RESULT_LOCATION_DISALLOW, return CB_RESULT_LOCATION_ALLOW)
-CHECK_INCOMPATIBLE  (hardware_store, 16, CB_RESULT_LOCATION_DISALLOW, THIS_ID(hotel))
-CHECK_INCOMPATIBLE  (food_market, 16, CB_RESULT_LOCATION_DISALLOW, THIS_ID(hardware_store))
-CHECK_INCOMPATIBLE  (petrol_pump, 20, CB_RESULT_LOCATION_DISALLOW, THIS_ID(food_market))
-CHECK_FOUNDER       (THIS_ID(petrol_pump))
 
 item(FEAT_INDUSTRIES, petrol_pump, IND_PETROLPUMP_ID) {
 	property {
@@ -158,7 +153,6 @@ item(FEAT_INDUSTRIES, petrol_pump, IND_PETROLPUMP_ID) {
 	graphics {
 		construction_probability:THIS_ID(check_availability);
 		extra_text_fund:         return string(STR_FUND_AVAILABLE_FROM, string(STR_FUND_AVAILABLE_FROM_DATE_PETROL_PUMP));
-		location_check:          THIS_ID(check_location);
 	}
 }
 

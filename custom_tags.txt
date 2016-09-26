@@ -1,3 +1,0 @@
-VERSION  :r2815M
-TITLE    :funkyL's FIRS variation r2815M
-FILENAME :firs.grf

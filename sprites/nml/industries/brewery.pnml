@@ -174,11 +174,6 @@ tilelayout tilelayout_brewery_5 {
 #define THIS_STR_DEBUG_TEXT       STR_EXTRA_TEXT_DEBUG_SECONDARY
 
 
-CHECK_INCOMPATIBLE  (brewery,       56, CB_RESULT_LOCATION_DISALLOW, return CB_RESULT_LOCATION_ALLOW)
-CHECK_INCOMPATIBLE  (arable_farm,   16, CB_RESULT_LOCATION_DISALLOW, THIS_ID(brewery))
-CHECK_INCOMPATIBLE  (grain_mill,    16, CB_RESULT_LOCATION_DISALLOW, THIS_ID(arable_farm))
-CHECK_TOWN_DISTANCE (town_distance,  0, 64, THIS_ID(grain_mill))
-CHECK_FOUNDER       (THIS_ID(town_distance))
 
 SWITCH_COLOUR_SCHEME1(THIS_ID(colour))
 
@@ -226,7 +221,6 @@ item(FEAT_INDUSTRIES, brewery, IND_BREWERY_ID) {
 	graphics {
 		produce_cargo_arrival:   THIS_ID(produce);
 		construction_probability:THIS_ID(check_availability);
-		location_check:          THIS_ID(check_location);
 		monthly_prod_change:     THIS_ID(check_production_level);
 		random_prod_change:      THIS_ID(check_closure);
 		extra_text_industry:     THIS_ID(extra_text);
