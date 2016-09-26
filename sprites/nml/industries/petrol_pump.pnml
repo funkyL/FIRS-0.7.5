@@ -1,0 +1,165 @@
+/*
+ * This file is part of FIRS Industry Set for OpenTTD.
+ * FIRS is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
+ * FIRS is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with FIRS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include "../templates/spritelayout_templates.pnml"
+
+#define THIS_ID(...) petrol_pump ## __VA_ARGS__
+
+spriteset(THIS_ID(spriteset_ground), "sprites/graphics/industries/groundtiles.png") {
+	tmpl_ground_tile(80, 10)
+	tmpl_ground_tile(80, 10)
+}
+
+spriteset(THIS_ID(spriteset_1)) {
+	tmpl_building_sprite_filename(10, 60, 59, -28, "sprites/graphics/industries/petrolpump.png")
+	tmpl_building_sprite_filename(10, 60, 59, -28, "sprites/graphics/industries/petrolpump_snow.png")
+}
+
+spriteset(THIS_ID(spriteset_2)) {
+	tmpl_building_sprite_filename(80, 60, 59, -28, "sprites/graphics/industries/petrolpump.png")
+	tmpl_building_sprite_filename(80, 60, 59, -28, "sprites/graphics/industries/petrolpump_snow.png")
+}
+
+SPRITELAYOUT_NORMAL_SNOW(THIS_ID(spritelayout_1), GROUNDSPRITE_CONCRETE, GROUNDSPRITE_CONCRETE, THIS_ID(spriteset_1), 16)
+
+SPRITELAYOUT_NORMAL_SNOW(THIS_ID(spritelayout_2), GROUNDSPRITE_CONCRETE, GROUNDSPRITE_CONCRETE, THIS_ID(spriteset_2), 16)
+
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(layout_1), relative_pos) {
+	relative_coord(0, 1): THIS_ID(spritelayout_2);
+	THIS_ID(spritelayout_1);
+}
+
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(layout_2), relative_pos) {
+	relative_coord(1, 0): THIS_ID(spritelayout_2);
+	THIS_ID(spritelayout_1);
+}
+
+switch(FEAT_INDUSTRYTILES, PARENT, THIS_ID(layout), layout_num) {
+	1: THIS_ID(layout_1);
+	2: THIS_ID(layout_2);
+	THIS_ID(spritelayout_1);
+}
+
+/* *************************************************
+ * Definition of the industry tile and its callbacks
+ * *************************************************/
+
+/* Petrol station uses special road check, tailored for each layout separately
+ * when called by the game engine
+ */
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(tile1_layout1_road_check),
+			(
+			nearby_tile_class( 0, -1) == TILE_CLASS_ROAD ||
+			nearby_tile_class( 0,  2) == TILE_CLASS_ROAD ||
+			nearby_tile_class(-1,  0) == TILE_CLASS_ROAD ||
+			nearby_tile_class(-1,  1) == TILE_CLASS_ROAD ||
+			nearby_tile_class( 1,  0) == TILE_CLASS_ROAD ||
+			nearby_tile_class( 1,  1) == TILE_CLASS_ROAD
+			) ) {
+	1: return CB_RESULT_LOCATION_ALLOW;
+	return CB_RESULT_LOCATION_DISALLOW;
+}
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(tile1_layout2_road_check),
+			(
+			nearby_tile_class( 0, -1) == TILE_CLASS_ROAD ||
+			nearby_tile_class( 0,  1) == TILE_CLASS_ROAD ||
+			nearby_tile_class( 1, -1) == TILE_CLASS_ROAD ||
+			nearby_tile_class( 1,  1) == TILE_CLASS_ROAD ||
+			nearby_tile_class(-1,  0) == TILE_CLASS_ROAD ||
+			nearby_tile_class( 2,  0) == TILE_CLASS_ROAD
+			) ) {
+	1: return CB_RESULT_LOCATION_ALLOW;
+	return CB_RESULT_LOCATION_DISALLOW;
+}
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(tile1_layout_check), (extra_callback_info2 & 255)) {
+	0: THIS_ID(tile1_layout1_road_check);
+	1: THIS_ID(tile1_layout2_road_check);
+	return CB_RESULT_LOCATION_DISALLOW;
+}
+
+TILE_ALLOW_PLAYER         (tile1_player_check,                                      THIS_ID(tile1_layout_check))
+TILE_DISALLOW_SLOPES      (tile1_location_check, CB_RESULT_LOCATION_DISALLOW, THIS_ID(tile1_player_check))
+
+item(FEAT_INDUSTRYTILES, THIS_ID(tile), TILE_PETROLPUMP_1) {
+	property {
+		substitute:       0;
+		accepted_cargos:  [[FOOD, 8], [GOOD, 8], [PETR, 8]];
+		land_shape_flags: bitmask(LSF_ONLY_ON_FLAT_LAND);
+	}
+	graphics {
+		tile_check:   THIS_ID(tile1_location_check);
+		THIS_ID(layout);
+	}
+}
+
+/* *************************************************
+ * Definition of the industry layouts
+ * *************************************************/
+
+tilelayout tilelayout_petrol_pump_1 {
+	0, 0: THIS_ID(tile);
+	0, 1: THIS_ID(tile);
+}
+
+tilelayout tilelayout_petrol_pump_2 {
+	0, 0: THIS_ID(tile);
+	1, 0: THIS_ID(tile);
+}
+/* *************************************************
+ * Definition of the industry
+ * *************************************************/
+/* availability years - also update available from strings if changing these  */
+
+#include "../templates/check_availability.pnml"
+
+CHECK_INCOMPATIBLE  (hotel, 16, CB_RESULT_LOCATION_DISALLOW, return CB_RESULT_LOCATION_ALLOW)
+CHECK_INCOMPATIBLE  (hardware_store, 16, CB_RESULT_LOCATION_DISALLOW, THIS_ID(hotel))
+CHECK_INCOMPATIBLE  (food_market, 16, CB_RESULT_LOCATION_DISALLOW, THIS_ID(hardware_store))
+CHECK_INCOMPATIBLE  (petrol_pump, 20, CB_RESULT_LOCATION_DISALLOW, THIS_ID(food_market))
+CHECK_FOUNDER       (THIS_ID(petrol_pump))
+
+item(FEAT_INDUSTRIES, petrol_pump, IND_PETROLPUMP_ID) {
+	property {
+		substitute: 0;
+		layouts: [
+				tilelayout_petrol_pump_1,
+				tilelayout_petrol_pump_2
+			];
+		life_type:              IND_LIFE_TYPE_BLACK_HOLE;
+		name:                   string(STR_IND_PETROLPUMP);
+		nearby_station_name:    string(STR_STATION, string(STR_TOWN), string(STR_IND_PETROLPUMP));
+		closure_msg:            TTD_STR_NEWS_INDUSTRY_CLOSURE_SUPPLY_PROBLEMS;
+		prod_increase_msg:      TTD_STR_NEWS_INDUSTRY_PRODUCTION_INCREASE_GENERAL;
+		prod_decrease_msg:      TTD_STR_NEWS_INDUSTRY_PRODUCTION_DECREASE_GENERAL;
+		new_ind_msg:            TTD_STR_NEWS_INDUSTRY_CONSTRUCTION;
+
+		prod_cargo_types:       [];
+		accept_cargo_types:     [FOOD, GOOD, PETR];
+
+		prod_multiplier:        [0, 0];
+		input_multiplier_1:     [0, 0];
+		input_multiplier_2:     [0, 0];
+		input_multiplier_3:     [0, 0];
+		min_cargo_distr:        2;
+
+		conflicting_ind_types:  [];
+		spec_flags:             0;
+		prob_random:            14;
+		prob_in_game:           14;
+		prospect_chance:        0.75;
+		fund_cost_multiplier:   8;
+		remove_cost_multiplier: 0;
+		map_colour:             15;
+	}
+	graphics {
+		construction_probability:THIS_ID(check_availability);
+		extra_text_fund:         return string(STR_FUND_AVAILABLE_FROM, string(STR_FUND_AVAILABLE_FROM_DATE_PETROL_PUMP));
+		location_check:          THIS_ID(check_location);
+	}
+}
+
+#include "../templates/undefs.pnml"

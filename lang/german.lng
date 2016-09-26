@@ -1,0 +1,195 @@
+
+##grflangid 0x02
+##gender m w n p
+##plural 0
+
+STR_GRF_DESC                                                                    :{ORANGE}FIRS Industrie-Set{}{BLACK}Von {SILVER}andythenorth{BLACK}, {SILVER}FooBar{BLACK}, {SILVER}Terkhen{BLACK} und {SILVER}planetmaker{BLACK}.{}{BLACK}Website: {SILVER}www.tt-foundry.com/sets/FIRS{}{BLACK}. Lizenz: {SILVER}GPL v20D{BLACK}. Besonderen Dank an {SILVER}Ammler{BLACK}, {SILVER}CoreXii{BLACK}, {SILVER}Irwe{BLACK} und {SILVER}Zephyris{BLACK}.{}FIRS nutzt Teile von {SILVER}eGRVTS{BLACK}, {SILVER}ISR{BLACK} und {SILVER}OpenGFX{BLACK}.
+STR_GRF_NAME                                                                    :{TITLE}
+STR_GRF_URL                                                                     :http://dev.openttdcoop.org/projects/firs
+
+STR_PARAM_DESC_COAST_DISTANCE_MARINE_INDUSTRY                                   :Maximaler Abstand von Fischgründen und Baggersees von der Küste in Feldern
+STR_PARAM_DESC_STAT_RATING                                                      :Die Bahnhofsbewertung beeinflußt die Anzahl zum Bahnhof gelieferter Güter; je höher die Bewertung ist, desto mehr Güter werden zum Bahnhof geliefert.
+STR_PARAM_DESC_DEBUG                                                            :Für Entwickler
+STR_PARAM_DESC_ECONOMIES                                                        :Sobald fertiggestellt, wird FIRS eine Anzahl verschiedener Wirtschaft(sschwerpunkte) anbieten. Diese unterscheiden sich in Frachtarten, deren Profitabilität und den verfügbaren Industrien.{}{}{SILVER}Zur Zeit gibt es nur einen Wirtschaftstyp.
+STR_PARAM_DESC_NEVER_CLOSE                                                      :Standardmäßig schließen Primärindustrien in FIRS nie.{}Wenn das Schließen von Primärindustrien erlaubt ist, so schließt eine Industrie, wenn ihre Produktion sehr niedrig ist (die genaue Menge hängt von der Industrie ab). {SILVER}Voraussetzung: 'Primärindustrien dürfen Produktion vermindern' ist aktiviert.
+STR_PARAM_DESC_NO_OPENINGS                                                      :Standardmäßig werden neue Industrien im Laufe der Zeit gegründet.{}{}Wenn 'Neue Industrien öffnen' ausgeschaltet ist, werden keine neuen Industrien auftauchen und Spieler können auch keine finanzieren oder prospektieren.
+STR_PARAM_DESC_PRIMARY_PRODUCTION_DECREASE                                      :Standardmäßig reduzieren Primärindustrien in FIRS ihre Produktion nie.{}Wenn eine Reduzierung der Produktionsmenge bei Primärindustrien erlaubt ist, gibt es eine Wahrscheinlichkeit mit der eine Industrie seine Produktion senkt, wenn einen Monat lang keine Güter angeliefert wurden. Bei hohen Produktionsraten ist die Wahrscheinlichkeit größer.
+STR_PARAM_DESC_SECONDARY_NEVER_CLOSE                                            :Standardmäßig schließen Sekundärindustrien in FIRS nie.{}{}Wenn das Schließen von Sekundärindustrien erlaubt ist, so kann sie schließen, wenn über einen längeren Zeitraum keine Fracht transportiert worden ist.
+STR_PARAM_NAME_COAST_DISTANCE_MARINE_INDUSTRY                                   :Maximaler Abstrand mariner Industrien von der Küste
+STR_PARAM_NAME_DEBUG                                                            :Debug-Texte anzeigen
+STR_PARAM_NAME_ECONOMIES                                                        :Wirtschaftstyp
+STR_PARAM_NAME_NEVER_CLOSE                                                      :Primärindustrien dürfen schließen
+STR_PARAM_NAME_NO_OPENINGS                                                      :Bau von Industrien verbieten (nicht vollständig)
+STR_PARAM_NAME_PRIMARY_PRODUCTION_DECREASE                                      :Primärindustrien dürfen Produktion vermindern
+STR_PARAM_NAME_SECONDARY_NEVER_CLOSE                                            :Sekundärindustrien dürfen schließen
+STR_PARAM_VALUE_ECONOMIES_TEST_ECONOMY                                          :Standard
+STR_PARAM_VALUE_SECONDARY_NEVER_CLOSE_0                                         :Kein Limit
+STR_PARAM_NAME_STAT_RATING                                                      :Algorithmus für Stationsbewertung
+STR_PARAM_VALUE_STAT_RATING_DEFAULT                                             :Standard
+STR_PARAM_VALUE_STAT_RATING_REDUCED_TIME                                        :Verbesserte Bahnhofsbewertung - Reduzierter Einfluß der Zeit seit der letzten Frachtaufnahme
+STR_PARAM_VALUE_STAT_RATING_100                                                 :Immer 100%
+
+STR_CARGO_NAME_ALCOHOL                                                          :Spirituosen
+STR_CARGO_NAME_BAUXITE                                                          :{G=n}Bauxit
+STR_CARGO_NAME_BUILDING_MATERIALS                                               :{G=p}Baustoffe
+STR_CARGO_NAME_CHEMICALS                                                        :{G=p}Chemikalien
+STR_CARGO_NAME_CLAY                                                             :{G=p}Tonminerale
+STR_CARGO_NAME_ENGINEERING_SUPPLIES                                             :{G=p}Ersatzteile
+STR_CARGO_NAME_FIBRES                                                           :{G=p}Pflanzenfasern
+STR_CARGO_NAME_FISH                                                             :{G=m}Fisch
+STR_CARGO_NAME_FARM_SUPPLIES                                                    :{G=p}landw. Betriebsmittel
+STR_CARGO_NAME_FRUITS                                                           :{G=p}Früchte und Gemüse
+STR_CARGO_NAME_LUMBER                                                           :{G=n}Bauholz
+STR_CARGO_NAME_METAL                                                            :{G=n}Metall
+STR_CARGO_NAME_MILK                                                             :{G=w}Milch
+STR_CARGO_NAME_MANUFACTURING_SUPPLIES                                           :{G=p}Produktionsgüter
+STR_CARGO_NAME_PETROL                                                           :{G=m}Treibstoff
+STR_CARGO_NAME_RECYCLABLES                                                      :{G=p}Wertstoffe
+STR_CARGO_NAME_SAND                                                             :{G=m}Sand
+STR_CARGO_NAME_SCRAP_METAL                                                      :{G=n}Altmetall
+STR_CARGO_NAME_STONE                                                            :{G=p}Steine
+STR_CARGO_NAME_SUGAR_BEET                                                       :{G=p}Zuckerrüben
+STR_CARGO_NAME_SUGARCANE                                                        :{G=n}Zuckerrohr
+STR_CARGO_NAME_WOOL                                                             :{G=w}Wolle
+
+STR_CARGO_UNIT_PETROL                                                           :{VOLUME} Treibstoff
+STR_CARGO_UNIT_ALCOHOL                                                          :{VOLUME} Spirituosen
+STR_CARGO_UNIT_BAUXITE                                                          :{WEIGHT} Bauxit
+STR_CARGO_UNIT_BUILDING_MATERIALS                                               :{WEIGHT} Baustoffe
+STR_CARGO_UNIT_CHEMICALS                                                        :{VOLUME} Chemikalien
+STR_CARGO_UNIT_CLAY                                                             :{WEIGHT} Tonminerale
+STR_CARGO_UNIT_ENGINEERING_SUPPLIES                                             :{SIGNED_WORD} Kiste{P 0 "" n} Ersatzteile
+STR_CARGO_UNIT_FIBRES                                                           :{WEIGHT} Pflanzenfasern
+STR_CARGO_UNIT_FISH                                                             :{WEIGHT} Fisch
+STR_CARGO_UNIT_FMSP                                                             :{SIGNED_WORD} Kiste{P 0 "" n} landw. Betriebsmittel
+STR_CARGO_UNIT_FRUITS                                                           :{WEIGHT} Früchte
+STR_CARGO_UNIT_LUMBER                                                           :{WEIGHT} Bauholz
+STR_CARGO_UNIT_METAL                                                            :{WEIGHT} Metall
+STR_CARGO_UNIT_MILK                                                             :{VOLUME} Milch
+STR_CARGO_UNIT_MNSP                                                             :{SIGNED_WORD} Kiste{P 0 "" n} Produktionsgüter
+STR_CARGO_UNIT_RECYCLABLES                                                      :{WEIGHT} Wertstoffe
+STR_CARGO_UNIT_SAND                                                             :{WEIGHT} Sand
+STR_CARGO_UNIT_SCRAP_METAL                                                      :{WEIGHT} Altmetall
+STR_CARGO_UNIT_STONE                                                            :{WEIGHT} Steine
+STR_CARGO_UNIT_SUGAR_BEET                                                       :{WEIGHT} Zuckerrüben
+STR_CARGO_UNIT_SUGARCANE                                                        :{WEIGHT} Zuckerrohr
+STR_CARGO_UNIT_WOOL                                                             :{WEIGHT} Wolle
+
+
+STR_CID_ALCOHOL                                                                 :{TINYFONT}AL
+STR_CID_BAUXITE                                                                 :{TINYFONT}BX
+STR_CID_BUILDING_MATERIALS                                                      :{TINYFONT}BS
+STR_CID_CHEMICALS                                                               :{TINYFONT}CH
+STR_CID_CLAY                                                                    :{TINYFONT}TM
+STR_CID_ENGINEERING_SUPPLIES                                                    :{TINYFONT}ET
+STR_CID_FARM_SUPPLIES                                                           :{TINYFONT}LB
+STR_CID_FIBRES                                                                  :{TINYFONT}PF
+STR_CID_FISH                                                                    :{TINYFONT}FI
+STR_CID_LUMBER                                                                  :{TINYFONT}BH
+STR_CID_MANUFACTURING_SUPPLIES                                                  :{TINYFONT}PG
+STR_CID_METAL                                                                   :{TINYFONT}ME
+STR_CID_MILK                                                                    :{TINYFONT}ML
+STR_CID_PETROL                                                                  :{TINYFONT}TS
+STR_CID_RECYCLABLES                                                             :{TINYFONT}WS
+STR_CID_SAND                                                                    :{TINYFONT}SD
+STR_CID_SCRAP_METAL                                                             :{TINYFONT}AM
+STR_CID_STONE                                                                   :{TINYFONT}ST
+STR_CID_SUGAR_BEET                                                              :{TINYFONT}ZU
+STR_CID_SUGARCANE                                                               :{TINYFONT}ZR
+STR_CID_WOOL                                                                    :{TINYFONT}WL
+
+STR_ERR_CLIMATE_TOYLAND                                                         :{ORANGE}FIRS ist nicht für die Nutzung mit dem Spielzeugland ausgelegt.
+STR_ERR_INCOMPATIBLE_SET                                                        :{ORANGE}E01: {YELLOW}Inkompatibles Set: {ORANGE}{STRING} {YELLOW}Siehe FIRS-Readme: {ORANGE}{}http://bundles.openttdcoop.org/firs/releases/readme.txt
+STR_ERR_INCOMPATIBLE_PARAM_CANSET                                               :{ORANGE}E02: {YELLOW}Inkompatible Parameter: {ORANGE}CanSet Parameter 2 muß für Kompatibilität mit FIRS 0 sein. {YELLOW}Siehe FIRS Readme: {ORANGE}{}http://bundles.openttdcoop.org/firs/releases/readme.txt
+STR_ERR_INCOMPATIBLE_PARAM_CITYSET                                              :{ORANGE}E02: {YELLOW}Inkompatible Parameter: {ORANGE}NA City Set Parameter 2 muß für Kompatibilität mit FIRS 0 sein. {YELLOW}Consult FIRS ReadMe: {ORANGE}{}http://bundles.openttdcoop.org/firs/releases/readme.txt
+STR_ERR_INCOMPATIBLE_SET_TTRS_VERSION                                           :{ORANGE}E04: {YELLOW}Inkompatible Version: {ORANGE}Total Town Replacement Set muß für FIRS-Kompatibilität Version 3.11 oder neuer sein. {YELLOW}Siehe FIRS ReadMe: {ORANGE}{}http://bundles.openttdcoop.org/firs/releases/readme.txt
+STR_ERR_OPENTTD_VERSION                                                         :{ORANGE}E00: FIRS benötigt OpenTTD 1.2.0 / trunk r22780 oder neuer. {YELLOW}Siehe FIRS Readme: {ORANGE}{}http://bundles.openttdcoop.org/firs/releases/readme.txt
+
+STR_ERR_LOCATION_NOT_ABOVE_SNOWLINE                                             :muß unterhalb der Schneegrenze errichtet werden.
+STR_ERR_LOCATION_NOT_ON_WATER                                                   :muß an Land errichtet werden.
+STR_ERR_LOCATION_NOT_IN_DESERT                                                  :kann nicht in Wüsten errichtet werden.
+STR_ERR_LOCATION_NOT_ON_STEEP_SLOPE                                             :kann nicht an Steilhängen errichtet werden.
+
+STR_EXTRA_ALUMINUM_PLANT                                                        :{BLACK}Produktion:{}  2t pro gelieferter 8t Bauxit{}  2t pro gelieferter 8t Chemikalien{}  4t pro gelieferter 8t Altmetall{}{}Produktion steigt, wenn zwei oder mehr Frachtarten innerhalb eines Monats geliefert werden.
+STR_EXTRA_BIOREFINERY                                                           :{BLACK}Verarbeitet Getreide und Zucker zu Treibstoff und Chemikalien.{}{}6t Produktion pro gelieferter 8t.
+STR_EXTRA_BREWERY                                                               :{BLACK}Produktion:{}  3t pro gelieferter 8t Produktionsgüter{}  5t pro gelieferter 8t Getreide{}  5t pro gelieferter 8t Früchte und Gemüse{}{}Produktion steigt, wenn Produktionsgüter innerhalb eines Monats wie die andere Fracht geliefert werden.
+STR_EXTRA_BRICKWORKS                                                            :{BLACK}Produktion:{}  2t pro gelieferter 8t Kohle{}  2t pro gelieferter 8t Sand{}  4t pro gelieferter 8t Ton{}{}Produktion steigt, wenn zwei oder mehr Frachtarten innerhalb eines Monats geliefert werden.
+STR_EXTRA_CEMENT_PLANT                                                          :{BLACK}Produktion:{}  2t pro gelieferter 8t Kohle{}  2t pro gelieferter 8t Ton{}  4t pro gelieferter 8t Steine{}{}Produktion steigt, wenn zwei oder mehr Frachtarten innerhalb eines Monats geliefert werden.
+STR_EXTRA_DAIRY                                                                 :{BLACK}Produktion:{}  3t pro gelieferter 8t Produktionsgüter{}  5t pro gelieferter 8t Milch{}{}Steigt auf 8t Produktion pro gelieferter 8t, wenn beide Frachtarten innerhalb eines Monats geliefert werden.
+STR_EXTRA_ENGINEERING_SUPPLIES                                                  :{BLACK}Ersatzteile können die Produktion erhöhen.{}{YELLOW} Diesen Monat wurden {COMMA} Kisten geliefert
+STR_EXTRA_FARM_SUPPLIES                                                         :{BLACK}landw. Betriebsmittel können die Produktion erhöhen.{}{YELLOW} Diesen Monat wurden {COMMA} Kisten geliefert
+STR_EXTRA_FERTILIZER_PLANT                                                      :{BLACK}Verarbeitet Chemikalien zu Dünger für landwirtschaftlichen Gebrauch.{}{}{WEIGHT_SHORT} Produktion pro gelieferter {VOLUME_SHORT}.
+STR_EXTRA_FISHING_HARBOUR                                                       :{BLACK}Produktion:{}  3t pro gelieferter 8t Produktionsgüter{}  5t pro gelieferter 8t Fisch{}{}Steigt auf 8t Produktion pro gelieferter 8t, wenn beide Frachtarten innerhalb eines Monats geliefert werden.
+STR_EXTRA_FURNITURE_FACTORY                                                     :{BLACK}Produktion:{}  3t pro gelieferter 8t Produktionsgüter{}  5t pro gelieferter 8t Bauholz{}{}Steigt auf 8t Produktion pro gelieferter 8t, wenn beide Frachtarten innerhalb eines Monats geliefert werden.
+STR_EXTRA_GLASS_WORKS                                                           :{BLACK}Produziert Glasteile wie Flaschen, Gläser und Fensterscheiben.{}{}{BLACK}Produktion:{}  6t pro gelieferter 8t Sand{}  2t pro gelieferter 8t Chemikalien{}{}Steigt auf 8t Produktion pro gelieferter 8t, wenn beide Frachtarten innerhalb eines Monats geliefert werden.
+STR_EXTRA_GRAIN_MILL                                                            :{BLACK}Produktion:{}  3t pro gelieferter 8t Produktionsgüter{}  5t pro gelieferter 8t Getreide{}{}Steigt auf 8t Produktion pro gelieferter 8t, wenn beide Frachtarten innerhalb eines Monats geliefert werden.
+STR_EXTRA_IRON_WORKS                                                            :{BLACK}Produktion:{}  2t pro gelieferter 8t Holz{}  2t pro gelieferter 8t Eisenerz{}{}Steigt auf 4t Produktion pro gelieferter 8t, wenn beide Frachtarten innerhalb eines Monats geliefert werden.
+STR_EXTRA_LIME_KILN                                                             :{BLACK}Produktion:{}  3t pro gelieferter 8t Steine{}  3t pro gelieferter 8t Kohle{}{}Steigt auf 6t Produktion pro gelieferter 8t, wenn beide Frachtarten innerhalb eines Monats geliefert werden.
+STR_EXTRA_LUMBER_YARD                                                           :{BLACK}Produziert Dinge wie Balken und Zaunpfähle.{}{}{BLACK}Produktion:{}  2t pro gelieferter 8t Chemikalien{}  6t pro gelieferter 8t Bauholz{}{}Steigt auf 8t Produktion pro gelieferter 8t, wenn beide Frachtarten innerhalb eines Monats geliefert werden.
+STR_EXTRA_MACHINE_SHOP                                                          :{BLACK}Baut und wartet Maschinen.{}{}8t Produktion pro gelieferter 8t.
+STR_EXTRA_MEAT_PACKER                                                           :{BLACK}Produziert:{}  3t pro gelieferter 8t Produktionsgüter{}  5t pro gelieferten 8t Viehs{}{}Produktion steigt auf 8t pro gelieferter 8t wenn beide Frachtarten innerhalb eines Monats angeliefert werden.
+STR_EXTRA_METAL_FABRICATION_PLANT                                               :{BLACK}Produziert lackierte Metallgegenstände.{}{}{BLACK}Produktion:{}2t pro 8t gelieferter Chemikalien{}6t pro 8t gelieferten Metall{}{}Steigt auf 8t pro gelieferter 8t, wenn beide Frachtarten innerhalb eines Monats geliefert werden.
+STR_EXTRA_METAL_FOUNDRY                                                         :{BLACK}Produziert Metallgegenstände wie Werkzeuge und Ersatzteile.{}{}2t pro 8t gelieferter Chemikalien{}6t pro gelieferter 8t Metall{}{}Steigt auf 8t pro gelieferter 8t, wenn beide Frachtarten innerhalb eines Monats geliefert werden.
+STR_EXTRA_OIL_REFINERY                                                          :{BLACK}Verarbeitet Rohöl in Treibstoff und Chemikalien.{}{}6t Produktion pro gelieferter 8t.
+STR_EXTRA_PAPER_MILL                                                            :{BLACK}Zermahlt Holz und stellt daraus Papier und Karton her.{}{}{BLACK}Produktion:{}  4t pro gelieferter 8t Holz{}  2t pro gelieferter 8t Ton{}  2t pro gelieferter 8t Chemikalien{}{}Produktion steigt, wenn zwei oder mehr Frachtarten innerhalb eines Monats geliefert werden.
+STR_EXTRA_PLASTICS_PLANT                                                        :{BLACK}Produziert Plastikteile wie Verpackungen und Haushaltswaren.{}{}6t Produktion pro gelieferter 8t.
+STR_EXTRA_RECYCLING_PLANT                                                       :{BLACK}Verarbeitet Wertstoffe zur Wiederverwendung in der Produktion.{}{}6t Produktion pro gelieferter 8t.
+STR_EXTRA_RECYCLING_DEPOT                                                       :{BLACK}Produziert Wertstoffe in Abhängigkeit von der Größe der nahegelegenen Stadt
+STR_EXTRA_SAWMILL                                                               :{BLACK}Sägt Holz.{}{}6t Produktion pro gelieferter 8t.
+STR_EXTRA_SMITHY_FORGE                                                          :{BLACK}Verarbeitet Schmiedeeisen zu Gegenständen wie Zäunen, Werkzeugen, Pflügen, Schaufeln und Hufeisen.{}{}5t Produktion pro gelieferter 8t.
+STR_EXTRA_STEELMILL                                                             :{BLACK}Produktion:{}  2t pro gelieferter 8t Eisenerz{}  2t pro gelieferter 8t Kohle{}  4t pro gelieferter 8t Altmetall{}{}Produktion steigt, wenn zwei oder mehr Frachtarten innerhalb eines Monats geliefert werden.
+STR_EXTRA_SUGAR_REFINERY                                                        :{BLACK}Produktion:{}  3t pro gelieferter 8t Produktionsgüter{}  5t pro gelieferter 8t Rohrzucker{}{}Steigt auf 8t Produktion pro gelieferter 8t, wenn beide Frachtarten innerhalb eines Monats geliefert werden.
+STR_EXTRA_TEXTILE_MILL                                                          :{BLACK}Produktion:{}  3t pro gelieferter 8t Produktionsgüter{}  5t pro gelieferter 8t Wolle{}  5t pro gelieferter 8t pflanzlicher Fasern{}{}Produktion steigt, wenn Produktionsgüter innerhalb eines Monats wie die andere Fracht geliefert werden.
+
+STR_EXTRA_TEXT_DEBUG_SECONDARY                                                  :{BLACK}------------ DEBUG ------------{}Produktion diesen Monat:{}Fracht 1: {WHITE}{COMMA}{BLACK}{}Fracht 2: {WHITE}{COMMA}{BLACK}{}Tage seit letzter Lieferung: {WHITE}{COMMA}{BLACK}
+STR_EXTRA_MAX_PRODUCTION                                                        :{BLACK}Maximale Produktion erreicht
+STR_GENERIC_NEWLINE                                                             :{}
+
+STR_FUND_MIXED_FARM                                                             :{}{BLACK}Ort: {YELLOW}Kann nicht im Schnee oder in Wüsten errichtet werden.
+STR_FUND_ARABLE_FARM                                                            :{}{BLACK}Ort: {YELLOW}Kann nicht im Schnee oder in Wüsten oder an Hängen errichtet werden.
+STR_FUND_FOREST                                                                 :{}{BLACK}Ort: {YELLOW}Kann nicht in Wüsten errichtet werden.
+STR_FUND_FRUIT_PLANTATION                                                       :{}{BLACK}Ort: {YELLOW}Kann nicht im Schnee errichtet werden.
+
+STR_FUND_AVAILABLE_FROM                                                         :{}{BLACK}Verfügbar ab:{YELLOW}{STRING}
+
+STR_IND_ALUMINIUM_PLANT                                                         :{G=w}Aluminiumhütte
+STR_IND_ARABLE_FARM                                                             :{G=m}Bauernhof (Ackerbau)
+STR_IND_BAUXITE_MINE                                                            :{G=w}Bauxitmine
+STR_IND_BIOREFINERY                                                             :{G=w}Bioraffinerie
+STR_IND_BREWERY                                                                 :{G=w}Brauerei
+STR_IND_BRICK_WORKS                                                             :{G=w}Ziegelei
+STR_IND_BUILDERS_YARD                                                           :{G=m}Bauhof
+STR_IND_CEMENT_PLANT                                                            :{G=w}Zementfabrik
+STR_IND_CLAY_PIT                                                                :{G=w}Tongrube
+STR_IND_DAIRY                                                                   :{G=w}Molkerei
+STR_IND_DAIRYFARM                                                               :{G=m}Bauernhof (Milchviehhaltung)
+STR_IND_DREDGING_SITE                                                           :{G=w}Baggerstelle
+STR_IND_FERTILISER_PLANT                                                        :{G=w}Düngerfabrik
+STR_IND_FISHING_GROUND                                                          :{G=p}Fischgründe
+STR_IND_FISHING_HARBOUR                                                         :{G=m}Fischereihafen
+STR_IND_FOOD_MARKET                                                             :{G=m}Gemischtwarenladen
+STR_IND_FURNITURE_FACTORY                                                       :{G=w}Möbelfabrik
+STR_IND_GLASS_WORKS                                                             :{G=w}Glashütte
+STR_IND_GRAIN_MILL                                                              :{G=w}Mühle
+STR_IND_HARDWARE_STORE                                                          :{G=m}Metallhandel
+STR_IND_HOTEL                                                                   :{G=n}Hotel
+STR_IND_IRON_WORKS                                                              :{G=n}Hüttenwerk
+STR_IND_JUNKYARD                                                                :{G=m}Schrottplatz
+STR_IND_LIME_KILN                                                               :{G=w}Kalkbrennerei
+STR_IND_LUMBER_YARD                                                             :{G=w}Holzverarbeitung
+STR_IND_MACHINE_SHOP                                                            :{G=m}Maschinenbaubetrieb
+STR_IND_METAL_FABRICATION_PLANT                                                 :{G=w}Metallwarenfabrik
+STR_IND_METAL_FOUNDRY                                                           :{G=w}Gießerei
+STR_IND_MIXEDFARM                                                               :{G=m}Bauernhof
+STR_IND_PETROLPUMP                                                              :{G=w}Tankstelle
+STR_IND_PLASTICS_PLANT                                                          :{G=w}Plastikfabrik
+STR_IND_QUARRY                                                                  :{G=m}Steinbruch
+STR_IND_RECYCLING_DEPOT                                                         :{G=m}Wertstoffhof
+STR_IND_RECYCLING_PLANT                                                         :{G=w}Recyclingfabrik
+STR_IND_SHEEPFARM                                                               :{G=m}Bauernhof (Schafhaltung)
+STR_IND_SMITHY_FORGE                                                            :{G=w}Schmiede
+STR_IND_STOCKYARD                                                               :{G=m}Schlachthof
+STR_IND_SUGAR_REFINERY                                                          :{G=w}Zuckerraffinerie
+STR_IND_SUPERMARKET                                                             :{G=m}Supermarkt
+STR_IND_TEXTILE_MILL                                                            :{G=w}Textilfabrik
+

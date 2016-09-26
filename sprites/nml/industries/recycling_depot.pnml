@@ -1,0 +1,155 @@
+/*
+ * This file is part of FIRS Industry Set for OpenTTD.
+ * FIRS is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
+ * FIRS is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with FIRS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include "../templates/spritelayout_templates.pnml"
+
+#define THIS_ID(...) recycling_depot ## __VA_ARGS__
+
+spriteset(THIS_ID(spriteset_1), "sprites/graphics/industries/recyclingdepot.png") { tmpl_ground_tile(10, 10) }
+spriteset(THIS_ID(spriteset_2), "sprites/graphics/industries/recyclingdepot.png") { tmpl_ground_tile(80, 10) }
+
+SPRITELAYOUT_FENCES_NORMAL(THIS_ID(spritelayout_1), GROUNDSPRITE_CONCRETE, THIS_ID(spriteset_1), 16)
+
+SPRITELAYOUT_FENCES_NORMAL(THIS_ID(spritelayout_2), GROUNDSPRITE_CONCRETE, THIS_ID(spriteset_2), 16)
+
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(layout), relative_pos) {
+	0: THIS_ID(spritelayout_1);
+	THIS_ID(spritelayout_2);
+}
+
+FENCES_EXCLUDE_BY_CLASS     ( THIS_ID(tile_fence_station),  THIS_ID(layout),   TILE_CLASS_STATION)
+FENCES_EXCLUDE_SAME_INDUSTRY( THIS_ID(tile_fence_industry), THIS_ID(tile_fence_station))
+ADD_FLAT_FENCES             ( THIS_ID(tile_fences),         THIS_ID(tile_fence_industry), 1, 1, 1, 1)
+
+/* *************************************************
+ * Definition of the industry tile and its callbacks
+ * *************************************************/
+
+CHECK_HOUSES_NEARBY     (tile_houses_15, -4, -4, return CB_RESULT_LOCATION_DISALLOW)
+CHECK_HOUSES_NEARBY     (tile_houses_14, -4, 4, THIS_ID(tile_houses_15))
+CHECK_HOUSES_NEARBY     (tile_houses_13, 4, -4, THIS_ID(tile_houses_14))
+CHECK_HOUSES_NEARBY     (tile_houses_12, 4, 4, THIS_ID(tile_houses_13))
+CHECK_HOUSES_NEARBY     (tile_houses_11, -3, -3, THIS_ID(tile_houses_12))
+CHECK_HOUSES_NEARBY     (tile_houses_10, -3, 3, THIS_ID(tile_houses_11))
+CHECK_HOUSES_NEARBY     (tile_houses_9, 3, -3, THIS_ID(tile_houses_10))
+CHECK_HOUSES_NEARBY     (tile_houses_8, 3, 3, THIS_ID(tile_houses_9))
+CHECK_HOUSES_NEARBY     (tile_houses_7, -2, 2, THIS_ID(tile_houses_8))
+CHECK_HOUSES_NEARBY     (tile_houses_6, 2, -2, THIS_ID(tile_houses_7))
+CHECK_HOUSES_NEARBY     (tile_houses_5, 2, 2,  THIS_ID(tile_houses_6))
+CHECK_HOUSES_NEARBY     (tile_houses_4, -3, 0, THIS_ID(tile_houses_5))
+CHECK_HOUSES_NEARBY     (tile_houses_3, 0, -3, THIS_ID(tile_houses_4))
+CHECK_HOUSES_NEARBY     (tile_houses_2, 3, 0,  THIS_ID(tile_houses_3))
+CHECK_HOUSES_NEARBY     (tile_houses_1, 0, 3, THIS_ID(tile_houses_2))
+TILE_DISALLOW_NEARBY_CLASS(tile_nearby_industry, TILE_CLASS_INDUSTRY, CB_RESULT_LOCATION_DISALLOW, THIS_ID(tile_houses_1))
+TILE_ALLOW_PLAYER         (tile_location_check,                                                          THIS_ID(tile_nearby_industry))
+
+item(FEAT_INDUSTRYTILES, THIS_ID(tile), TILE_RECYCLINGDEPOT_1) {
+	property {
+		substitute:       0;
+		accepted_cargos:  [];
+		land_shape_flags: bitmask(LSF_ONLY_ON_FLAT_LAND);
+	}
+	graphics {
+		tile_check: THIS_ID(tile_location_check);
+		THIS_ID(tile_fences);
+	}
+}
+
+/* *************************************************
+ * Definition of the industry layouts
+ * *************************************************/
+
+tilelayout tilelayout_recycling_depot_1 {
+	0, 0: THIS_ID(tile);
+	0, 1: THIS_ID(tile);
+	1, 0: THIS_ID(tile);
+	1, 1: THIS_ID(tile);
+}
+
+
+/* *************************************************
+ * Definition of the industry
+ * *************************************************/
+
+#define THIS_STR_EXTRA_SUPPLIES STR_EXTRA_ENGINEERING_SUPPLIES
+/* availability years - also update available from strings if changing these */
+
+
+CHECK_INCOMPATIBLE  (recycling_plant, 16, CB_RESULT_LOCATION_DISALLOW, return CB_RESULT_LOCATION_ALLOW)
+CHECK_INCOMPATIBLE  (recycling_depot, 20, CB_RESULT_LOCATION_DISALLOW, THIS_ID(recycling_plant))
+CHECK_INDUSTRY_TOWN_COUNT   (check_location, recycling_depot, 0, 0, string(STR_ERR_LOCATION_LIMIT_1_PER_TOWN), THIS_ID(recycling_depot))
+/* Don't use founder check for this industry, there is a hard limit of 1 per town irrespective of funding type */
+
+SWITCH_COLOUR_SCHEME1(THIS_ID(colour))
+
+/* Production template not used. We have our separate one, see below */
+#include "../templates/check_primary_production_level.pnml"
+
+#include "../templates/check_availability.pnml"
+
+
+/* We have a special production code here:
+ * Production depends on the town population: population / 12 is output
+ */
+produce(THIS_ID(production),
+		waiting_cargo_1, // should be 0
+		waiting_cargo_2, // should be 0
+		waiting_cargo_3, // should be 0
+		LOAD_TEMP(1),    // we stored output here
+		0,               // no 2nd output
+		0                // don't repeat
+		);
+/* Parent scope is towns. var 0x82 is the population
+ * TODO: use nicer variable names when towns are implemented
+ * in NML */
+switch(FEAT_INDUSTRIES, PARENT, THIS_ID(produce), [STORE_TEMP(((var[0x82, 3, 8191] + 11) / 12), 1)]) {
+	0: THIS_ID(production);
+	THIS_ID(production);
+}
+
+item(FEAT_INDUSTRIES, recycling_depot, IND_RECYCLINGDEPOT_ID) {
+	property {
+		substitute:             0;
+		layouts: [
+				tilelayout_recycling_depot_1
+			];
+		life_type:              IND_LIFE_TYPE_EXTRACTIVE;
+		closure_msg:            TTD_STR_NEWS_INDUSTRY_CLOSURE_SUPPLY_PROBLEMS;
+		prod_increase_msg:      TTD_STR_NEWS_INDUSTRY_PRODUCTION_INCREASE_GENERAL;
+		prod_decrease_msg:      TTD_STR_NEWS_INDUSTRY_PRODUCTION_DECREASE_GENERAL;
+		new_ind_msg:            TTD_STR_NEWS_INDUSTRY_CONSTRUCTION;
+		name:                   string(STR_IND_RECYCLING_DEPOT);
+		nearby_station_name:    string(STR_STATION, string(STR_TOWN), string(STR_IND_RECYCLING_DEPOT));
+		prod_cargo_types: [RCYC];
+		accept_cargo_types: [];
+		prod_multiplier: [0, 0];
+		input_multiplier_1: [0, 0];
+		input_multiplier_2: [0, 0];
+		input_multiplier_3: [0, 0];
+		min_cargo_distr: 2;
+		conflicting_ind_types: [];
+		prob_random: 20;
+		prob_in_game: 20;
+		prospect_chance: 0.75;
+		fund_cost_multiplier: 118;
+		map_colour: 191;
+		remove_cost_multiplier: 0;
+		spec_flags:             0;
+	}
+	graphics {
+		produce_256_ticks:       THIS_ID(produce);
+		construction_probability:THIS_ID(check_availability);
+		location_check:          THIS_ID(check_location);
+		monthly_prod_change:     THIS_ID(check_production_level);
+		random_prod_change:      THIS_ID(check_closure);
+		extra_text_industry:     return string(STR_EXTRA_RECYCLING_DEPOT);
+		extra_text_fund:         return string(STR_FUND_AVAILABLE_FROM, string(STR_FUND_AVAILABLE_FROM_DATE_RECYCLING_DEPOT));
+		colour:                  THIS_ID(colour);
+	}
+}
+
+#include "../templates/undefs.pnml"

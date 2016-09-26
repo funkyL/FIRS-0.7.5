@@ -1,0 +1,113 @@
+/*
+ * This file is part of FIRS Industry Set for OpenTTD.
+ * FIRS is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
+ * FIRS is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with FIRS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#define THIS_ID(...) hotel ## __VA_ARGS__
+
+spritelayout THIS_ID(spritelayout_1) {
+	ground {
+		sprite: GROUNDSPRITE_CLEARED;
+	}
+	building {
+		sprite: (terrain_type == TILETYPE_SNOW) ? 4583 : 4475;
+	}
+}
+
+spritelayout THIS_ID(spritelayout_2) {
+	ground {
+		sprite: GROUNDSPRITE_CLEARED;
+	}
+	building {
+		sprite: (terrain_type == TILETYPE_SNOW) ? 4584 : 4476;
+	}
+}
+
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(layout_1), relative_pos) {
+	relative_coord(0, 1): THIS_ID(spritelayout_2);
+	relative_coord(1, 1): THIS_ID(spritelayout_2);
+	THIS_ID(spritelayout_1);
+}
+
+switch(FEAT_INDUSTRYTILES, PARENT, THIS_ID(layout), layout_num) {
+	1: THIS_ID(layout_1);
+	THIS_ID(spritelayout_1);
+}
+
+/* *************************************************
+ * Definition of the industry tile and its callbacks
+ * *************************************************/
+
+item(FEAT_INDUSTRYTILES, THIS_ID(tile), TILE_HOTEL_1) {
+	property {
+		substitute:       0;
+		accepted_cargos:  [[FOOD, 8], [BEER, 8], [0, 8]];
+		land_shape_flags: bitmask(LSF_ONLY_ON_FLAT_LAND);
+	}
+
+	graphics {
+		THIS_ID(layout);
+	}
+}
+
+/* *************************************************
+ * Definition of the industry layouts
+ * *************************************************/
+
+tilelayout tilelayout_hotel_1 {
+	0, 0: THIS_ID(tile);
+	0, 1: THIS_ID(tile);
+	1, 0: THIS_ID(tile);
+	1, 1: THIS_ID(tile);
+}
+
+/* *************************************************
+ * Definition of the industry
+ * *************************************************/
+
+#include "../templates/check_availability.pnml"
+
+CHECK_INCOMPATIBLE  (petrol_pump, 16, CB_RESULT_LOCATION_DISALLOW, return CB_RESULT_LOCATION_ALLOW)
+CHECK_INCOMPATIBLE  (food_market, 16, CB_RESULT_LOCATION_DISALLOW, THIS_ID(petrol_pump))
+CHECK_INCOMPATIBLE  (hotel, 20, CB_RESULT_LOCATION_DISALLOW, THIS_ID(food_market))
+CHECK_FOUNDER       (THIS_ID(hotel))
+
+item(FEAT_INDUSTRIES, hotel, IND_HOTEL_ID) {
+	property {
+		substitute: 0;
+		layouts: [
+				tilelayout_hotel_1
+			];
+		life_type:              IND_LIFE_TYPE_BLACK_HOLE;
+		name:                   string(STR_IND_HOTEL);
+		nearby_station_name:    string(STR_STATION, string(STR_TOWN), string(STR_IND_HOTEL));
+		closure_msg:            TTD_STR_NEWS_INDUSTRY_CLOSURE_SUPPLY_PROBLEMS;
+		prod_increase_msg:      TTD_STR_NEWS_INDUSTRY_PRODUCTION_INCREASE_GENERAL;
+		prod_decrease_msg:      TTD_STR_NEWS_INDUSTRY_PRODUCTION_DECREASE_GENERAL;
+		new_ind_msg:            TTD_STR_NEWS_INDUSTRY_CONSTRUCTION;
+		prod_cargo_types:       [PASS];
+		accept_cargo_types:     [FOOD, BEER, PASS];
+		prod_multiplier: [20, 0];
+		input_multiplier_1: [0, 0];
+		input_multiplier_2: [0, 0];
+		input_multiplier_3: [0, 0];
+		min_cargo_distr: 2;
+		conflicting_ind_types:  [hotel];
+		prob_random: 10;
+		prob_in_game: 20;
+		prospect_chance: 0.75;
+		fund_cost_multiplier: 6;
+		map_colour: 190;
+		remove_cost_multiplier: 0;
+		spec_flags:             bitmask(IND_FLAG_BUILT_NEAR_TOWN); /*use build near town not in town, hotel is large and town locations hard to find */
+	}
+	graphics {
+		construction_probability:THIS_ID(check_availability);
+		build_prod_change:       randomise_primary_production_on_build;
+		location_check:          THIS_ID(check_location);
+	}
+}
+
+#include "../templates/undefs.pnml"

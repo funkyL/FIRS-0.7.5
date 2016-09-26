@@ -1,0 +1,45 @@
+/*
+ * This file is part of FIRS industry set.
+ * FIRS industry set is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
+ * FIRS industry set is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with FIRS industry set. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/*
+ * This template prints extra texts in the industry view
+ *
+ * The displayed text differs whether debugging is enabled or not
+ *
+ * Required defines in the industry's pnml file:
+ *
+ * THIS_STR_EXTRA_TEXT         normal extra text without debugging
+ * THIS_STR_DEBUG_TEXT         debugging string
+ */
+
+#ifndef THIS_STR_EXTRA_TEXT
+#define THIS_STR_EXTRA_TEXT STR_GENERIC_NEWLINE
+#endif
+
+#ifndef THIS_STR_DEBUG_TEXT
+#define THIS_STR_DEBUG_TEXT STR_EXTRA_TEXT_DEBUG_SECONDARY
+#endif
+
+/* First fill the stack for the string parameters before actually
+ * returning the string
+ */
+switch (FEAT_INDUSTRIES, SELF, THIS_ID(extra_text_debug), [
+			STORE_TEMP(produced_this_month_1,256),
+			STORE_TEMP(produced_this_month_2,257),
+			STORE_TEMP(current_date - max( max(LOAD_PERM(var_date_received_1), LOAD_PERM(var_date_received_2)), LOAD_PERM(var_date_received_3)), 258)
+			]) {
+	return string(THIS_STR_DEBUG_TEXT);
+}
+switch (FEAT_INDUSTRIES, SELF, THIS_ID(extra_text), [
+#ifdef THIS_STR_EXTRA_TEXT_PARAM0
+			STORE_TEMP(THIS_STR_EXTRA_TEXT_PARAM0, 256),
+#endif
+			show_debug_texts
+			]) {
+	1: THIS_ID(extra_text_debug);
+	return string(THIS_STR_EXTRA_TEXT);
+}

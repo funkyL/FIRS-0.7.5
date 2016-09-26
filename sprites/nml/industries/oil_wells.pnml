@@ -1,0 +1,231 @@
+/*
+ * This file is part of FIRS industry set.
+ * FIRS industry set is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
+ * FIRS industry set is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with FIRS industry set. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include "../templates/spritelayout_templates.pnml"
+
+#define THIS_ID(...) oil_wells ## __VA_ARGS__
+
+spritelayout THIS_ID(spritelayout_oil_well) {
+	ground {
+		sprite: 2173;
+	}
+	building {
+		sprite:  2174 + (((animation_frame % 11) < 6) ? (animation_frame % 11) : 10 - (animation_frame % 11));
+		xoffset:    1;
+		yoffset:    2;
+		xextent:   15;
+		yextent:   14;
+	}
+}
+
+spriteset(spriteset_building, "sprites/graphics/industries/oilwell.png") { tmpl_building_sprite(10, 10, 38, -9) }
+
+spritelayout THIS_ID(spritelayout_building) {
+	ground {
+		sprite: 2022;
+	}
+	building {
+		sprite: spriteset_building;
+		recolour_mode: RECOLOUR_REMAP;
+		palette:  0;
+		xoffset:  1;
+		yoffset:  2;
+		xextent: 15;
+		yextent: 14;
+	}
+}
+
+/* ***************************************************
+ * Definition of the industry tiles and their callbacks
+ * ***************************************************/
+
+TILE_DISALLOW_NEARBY_CLASS(tile_nearby_industry, TILE_CLASS_INDUSTRY, CB_RESULT_LOCATION_DISALLOW, return CB_RESULT_LOCATION_ALLOW)
+TILE_ALLOW_PLAYER         (tile_location_check,                                                            THIS_ID(tile_nearby_industry))
+
+
+switch (FEAT_INDUSTRYTILES, SELF, THIS_ID(tile_oil_well_stop_anim), animation_frame) {
+	1: return 11; // jump to the 'stop animation cycle' when triggered and currently animated
+	2: return 12;
+	3: return 13;
+	4: return 14;
+	5: return 15;
+	6: return 16;
+	7: return 17;
+	8: return 18;
+	9: return 19;
+	10: return 20;
+	return CB_RESULT_DO_NOTHING;
+}
+
+switch (FEAT_INDUSTRYTILES, SELF, THIS_ID(tile_oil_well_start_anim), animation_frame) {
+	11: return 1;
+	12: return 2;
+	13: return 3;
+	14: return 4;
+	15: return 5;
+	16: return 6;
+	17: return 7;
+	18: return 8;
+	19: return 9;
+	20: return 10;
+	return CB_RESULT_START_ANIMATION;
+}
+
+
+random_switch (FEAT_INDUSTRYTILES, SELF, THIS_ID(tile_oil_well_random_trigger), bitmask(TRIGGER_INDUSTRYTILE_TILELOOP)) {
+	1: return THIS_ID(tile_oil_well_stop_anim);
+	1: return THIS_ID(tile_oil_well_start_anim);
+}
+
+switch (FEAT_INDUSTRYTILES, SELF, THIS_ID(tile_oil_well_anim_next_frame), animation_frame) {
+	10: return 1;
+	11: return CB_RESULT_STOP_ANIMATION; // Don't actually stop animation, just keep looping the same frame over and over.
+	20: return 11;
+	return CB_RESULT_NEXT_FRAME;
+}
+
+item(FEAT_INDUSTRYTILES, THIS_ID(tile_oil_well), TILE_OILWELLS_1) {
+	property {
+		substitute:         0;
+		accepted_cargos:    [[ENSP, 8]];
+		land_shape_flags:   0;
+		/* Animation. */
+		animation_info:     [ANIMATION_LOOPING, 20];
+		animation_speed:    3;
+		animation_triggers: bitmask(ANIM_TRIGGER_INDTILE_TILE_LOOP);
+		special_flags:      bitmask(INDTILE_FLAG_RANDOM_ANIMATION);
+	}
+	graphics {
+		tile_check:         THIS_ID(tile_location_check);
+		anim_control:       THIS_ID(tile_oil_well_random_trigger);
+		anim_next_frame:    THIS_ID(tile_oil_well_anim_next_frame);
+		random_trigger:     THIS_ID(tile_oil_well_random_trigger);
+		THIS_ID(spritelayout_oil_well);
+	}
+}
+
+item(FEAT_INDUSTRYTILES, THIS_ID(tile_building), TILE_OILWELLS_2) {
+	property {
+		substitute:       0;
+		accepted_cargos:  [[ENSP, 8]];
+		land_shape_flags: 0;
+	}
+	graphics {
+		tile_check:   THIS_ID(tile_location_check);
+		THIS_ID(spritelayout_building);
+	}
+}
+
+/* *************************************************
+ * Definition of the industry layouts
+ * *************************************************/
+
+tilelayout tilelayout_7594_1 {
+	0, 0: THIS_ID(tile_oil_well);
+	0, 7: THIS_ID(tile_oil_well);
+	1, 4: THIS_ID(tile_oil_well);
+	2, 1: THIS_ID(tile_oil_well);
+	3, 5: THIS_ID(tile_building);
+	4, 8: THIS_ID(tile_oil_well);
+	5, 1: THIS_ID(tile_oil_well);
+	5, 4: THIS_ID(tile_oil_well);
+}
+
+tilelayout tilelayout_7594_2 {
+	0, 0: THIS_ID(tile_oil_well);
+	0, 4: THIS_ID(tile_oil_well);
+	1, 4: THIS_ID(tile_oil_well);
+	2, 8: THIS_ID(tile_oil_well);
+	4, 4: THIS_ID(tile_building);
+	4, 8: THIS_ID(tile_oil_well);
+	5, 2: THIS_ID(tile_oil_well);
+	6, 2: THIS_ID(tile_oil_well);
+	6, 4: THIS_ID(tile_oil_well);
+}
+
+tilelayout tilelayout_7594_3 {
+	0, 0: THIS_ID(tile_oil_well);
+	0, 2: THIS_ID(tile_oil_well);
+	1, 4: THIS_ID(tile_oil_well);
+	1, 6: THIS_ID(tile_oil_well);
+	2, 0: THIS_ID(tile_building);
+	3, 2: THIS_ID(tile_oil_well);
+	3, 4: THIS_ID(tile_oil_well);
+}
+
+tilelayout tilelayout_7594_4 {
+	0, 0: THIS_ID(tile_oil_well);
+	0, 4: THIS_ID(tile_oil_well);
+	0, 6: THIS_ID(tile_oil_well);
+	1, 2: THIS_ID(tile_oil_well);
+	1, 8: THIS_ID(tile_building);
+	2, 0: THIS_ID(tile_oil_well);
+	2, 2: THIS_ID(tile_oil_well);
+	3, 1: THIS_ID(tile_oil_well);
+	5, 0: THIS_ID(tile_oil_well);
+	5, 2: THIS_ID(tile_oil_well);
+	6, 0: THIS_ID(tile_oil_well);
+}
+
+/* *************************************************
+ * Definition of the industry
+ * *************************************************/
+
+#define THIS_STR_EXTRA_SUPPLIES STR_EXTRA_ENGINEERING_SUPPLIES
+/* availability years - also update available from strings if changing these */
+
+CHECK_INCOMPATIBLE  (oil_refinery, 16, CB_RESULT_LOCATION_DISALLOW, return CB_RESULT_LOCATION_ALLOW)
+CHECK_FOUNDER       (THIS_ID(oil_refinery))
+
+SWITCH_COLOUR_SCHEME1(THIS_ID(colour))
+
+#include "../templates/produce_primary.pnml"
+#include "../templates/check_primary_production_level.pnml"
+
+#include "../templates/extra_text_primary.pnml"
+
+#include "../templates/check_availability.pnml"
+
+item(FEAT_INDUSTRIES, oil_wells, IND_OILWELLS_ID) {
+	property {
+		substitute: 0;
+		layouts: [
+				tilelayout_7594_1,
+				tilelayout_7594_2,
+				tilelayout_7594_3,
+				tilelayout_7594_4
+			];
+		life_type:              IND_LIFE_TYPE_ORGANIC;
+		closure_msg:            TTD_STR_NEWS_INDUSTRY_CLOSURE_SUPPLY_PROBLEMS;
+		prod_increase_msg:      TTD_STR_NEWS_INDUSTRY_PRODUCTION_INCREASE_GENERAL;
+		prod_decrease_msg:      TTD_STR_NEWS_INDUSTRY_PRODUCTION_DECREASE_GENERAL;
+		new_ind_msg:            TTD_STR_NEWS_INDUSTRY_CONSTRUCTION;
+		name: 18445;
+		prod_cargo_types: [OIL_];
+		accept_cargo_types: [ENSP];
+		prod_multiplier: [28];
+		conflicting_ind_types: [];
+		prob_random: 5;
+		prob_in_game: 3;
+		prospect_chance: 0.75;
+		fund_cost_multiplier: 230;
+		map_colour: 152;
+		spec_flags:           0;
+	}
+	graphics {
+		produce_cargo_arrival:   THIS_ID(produce);
+		construction_probability:THIS_ID(check_availability);
+		location_check:          THIS_ID(check_location);
+		monthly_prod_change:     THIS_ID(check_production_level);
+		random_prod_change:      THIS_ID(check_closure);
+		build_prod_change:       randomise_primary_production_on_build;
+		extra_text_industry:     THIS_ID(extra_text);
+		extra_text_fund:         return string(STR_FUND_AVAILABLE_FROM, string(STR_FUND_AVAILABLE_FROM_DATE_OILWELLS));
+		colour:                  THIS_ID(colour);
+	}
+}
+#include "../templates/undefs.pnml"

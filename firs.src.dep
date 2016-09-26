@@ -1,0 +1,73 @@
+firs.src.dep:  /usr/include/stdc-predef.h sprites/nml/header.pnml \
+ sprites/nml/parameters.pnml sprites/nml/defines.pnml \
+ sprites/nml/checks.pnml sprites/nml/conditions.pnml \
+ sprites/nml/cargo_props.pnml sprites/nml/cargo_graphics.pnml \
+ sprites/nml/templates/tile_fences.pnml \
+ sprites/nml/templates/tile_location.pnml \
+ sprites/nml/templates/tile_ground_sprite.pnml \
+ sprites/nml/templates/tile_cargos.pnml \
+ sprites/nml/templates/sprite_templates.pnml \
+ sprites/nml/templates/spritelayout_templates.pnml \
+ sprites/nml/templates/industry_location.pnml \
+ sprites/nml/templates/industry_colour.pnml \
+ sprites/nml/templates/industry_cargos.pnml sprites/nml/basetiles.pnml \
+ sprites/nml/randomise_primary_production_on_build.pnml \
+ sprites/nml/industries/aluminium_plant.pnml \
+ sprites/nml/industries/../templates/spritelayout_templates.pnml \
+ sprites/nml/industries/../templates/smoke_templates.pnml \
+ sprites/nml/industries/../templates/produce_secondary.pnml \
+ sprites/nml/industries/../templates/check_secondary_production_level.pnml \
+ sprites/nml/industries/../templates/check_secondary_closure.pnml \
+ sprites/nml/industries/../templates/extra_text_secondary.pnml \
+ sprites/nml/industries/../templates/check_availability.pnml \
+ sprites/nml/industries/../templates/undefs.pnml \
+ sprites/nml/industries/arable_farm.pnml \
+ sprites/nml/industries/../templates/produce_primary.pnml \
+ sprites/nml/industries/../templates/check_primary_production_level.pnml \
+ sprites/nml/industries/../templates/extra_text_primary.pnml \
+ sprites/nml/industries/bauxite_mine.pnml \
+ sprites/nml/industries/biorefinery.pnml \
+ sprites/nml/industries/brewery.pnml \
+ sprites/nml/industries/brickworks.pnml \
+ sprites/nml/industries/builders_yard.pnml \
+ sprites/nml/industries/../templates/spritelayouts_groundaware.pnml \
+ sprites/nml/industries/cement_plant.pnml \
+ sprites/nml/industries/clay_pit.pnml \
+ sprites/nml/industries/coal_mine.pnml sprites/nml/industries/dairy.pnml \
+ sprites/nml/industries/dairy_farm.pnml \
+ sprites/nml/industries/dredging_site.pnml \
+ sprites/nml/industries/fertiliser_plant.pnml \
+ sprites/nml/industries/fishing_grounds.pnml \
+ sprites/nml/industries/fishing_harbour.pnml \
+ sprites/nml/industries/food_market.pnml \
+ sprites/nml/industries/forest.pnml \
+ sprites/nml/industries/fruit_plantation.pnml \
+ sprites/nml/industries/furniture_factory.pnml \
+ sprites/nml/industries/glass_works.pnml \
+ sprites/nml/industries/grain_mill.pnml \
+ sprites/nml/industries/hardware_store.pnml \
+ sprites/nml/industries/hotel.pnml sprites/nml/industries/iron_works.pnml \
+ sprites/nml/industries/iron_ore_mine.pnml \
+ sprites/nml/industries/junk_yard.pnml \
+ sprites/nml/industries/lime_kiln.pnml \
+ sprites/nml/industries/lumber_yard.pnml \
+ sprites/nml/industries/machine_shop.pnml \
+ sprites/nml/industries/metal_fabrication_plant.pnml \
+ sprites/nml/industries/metal_workshop.pnml \
+ sprites/nml/industries/mixed_farm.pnml \
+ sprites/nml/industries/oil_rig.pnml \
+ sprites/nml/industries/oil_wells.pnml \
+ sprites/nml/industries/oil_refinery.pnml \
+ sprites/nml/industries/paper_mill.pnml \
+ sprites/nml/industries/petrol_pump.pnml \
+ sprites/nml/industries/plastics_plant.pnml \
+ sprites/nml/industries/quarry.pnml \
+ sprites/nml/industries/recycling_plant.pnml \
+ sprites/nml/industries/recycling_depot.pnml \
+ sprites/nml/industries/sheep_farm.pnml \
+ sprites/nml/industries/smithy_forge.pnml \
+ sprites/nml/industries/steelmill.pnml \
+ sprites/nml/industries/stockyard.pnml \
+ sprites/nml/industries/sugar_refinery.pnml \
+ sprites/nml/industries/sawmill.pnml \
+ sprites/nml/industries/textile_mill.pnml

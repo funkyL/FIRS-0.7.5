@@ -1,0 +1,199 @@
+/*
+ * This file is part of FIRS industry set.
+ * FIRS industry set is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
+ * FIRS industry set is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with FIRS industry set. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include "../templates/spritelayout_templates.pnml"
+
+#define THIS_ID(...) sugar_refinery ## __VA_ARGS__
+
+spriteset(THIS_ID(spriteset_ground), "sprites/graphics/industries/groundtiles.png") { tmpl_ground_tile(80, 10) }
+//large round tank
+spriteset(THIS_ID(spriteset_1), "sprites/graphics/industries/sugarrefinery.png") { tmpl_building_sprite(10, 10, 50, -23) }
+//cone silo
+spriteset(THIS_ID(spriteset_2), "sprites/graphics/industries/sugarrefinery.png") { tmpl_building_sprite(80, 10, 50, -25) }
+//large rectangular building
+spriteset(THIS_ID(spriteset_3), "sprites/graphics/industries/sugarrefinery.png") { tmpl_building_sprite(150, 10, 88, -56) }
+//4 large silos
+spriteset(THIS_ID(spriteset_4), "sprites/graphics/industries/sugarrefinery.png") { tmpl_building_sprite(220, 10, 88, -58) }
+//small brick gatehouse
+spriteset(THIS_ID(spriteset_5), "sprites/graphics/industries/sugarrefinery.png") { tmpl_building_sprite(290, 10, 88, -58) }
+//brick warehouse with 2 large chimneys
+spriteset(THIS_ID(spriteset_6), "sprites/graphics/industries/sugarrefinery.png") { tmpl_building_sprite(360, 10, 88, -58) }
+//brick storage yard
+spriteset(THIS_ID(spriteset_7), "sprites/graphics/industries/sugarrefinery.png") { tmpl_building_sprite(430, 10, 88, -58) }
+//lime processor stack
+spriteset(THIS_ID(spriteset_8), "sprites/graphics/industries/sugarrefinery.png") { tmpl_building_sprite(500, 10, 88, -58) }
+
+SPRITELAYOUT_NORMAL(THIS_ID(spritelayout_1), THIS_ID(spriteset_ground), THIS_ID(spriteset_1), 48)
+
+SPRITELAYOUT_NORMAL(THIS_ID(spritelayout_2), THIS_ID(spriteset_ground), THIS_ID(spriteset_2), 48)
+
+SPRITELAYOUT_NORMAL(THIS_ID(spritelayout_3), THIS_ID(spriteset_ground), THIS_ID(spriteset_3), 48)
+
+SPRITELAYOUT_NORMAL(THIS_ID(spritelayout_4), THIS_ID(spriteset_ground), THIS_ID(spriteset_4), 48)
+
+SPRITELAYOUT_NORMAL(THIS_ID(spritelayout_5), THIS_ID(spriteset_ground), THIS_ID(spriteset_5), 48)
+
+SPRITELAYOUT_NORMAL(THIS_ID(spritelayout_6), THIS_ID(spriteset_ground), THIS_ID(spriteset_6), 48)
+
+SPRITELAYOUT_NORMAL(THIS_ID(spritelayout_7), THIS_ID(spriteset_ground), THIS_ID(spriteset_7), 48)
+
+SPRITELAYOUT_NORMAL(THIS_ID(spritelayout_8), THIS_ID(spriteset_ground), THIS_ID(spriteset_8), 48)
+
+spritelayout THIS_ID(spritelayout_0) {
+	ground {
+		sprite: THIS_ID(spriteset_ground);
+		recolour_mode: RECOLOUR_REMAP;
+		palette: PALETTE_USE_DEFAULT;
+	}
+}
+
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(layout_1), relative_pos) {
+	relative_coord(0, 0): THIS_ID(spritelayout_4);
+	relative_coord(0, 1): THIS_ID(spritelayout_4);
+	relative_coord(0, 2): THIS_ID(spritelayout_4);
+	relative_coord(1, 0): THIS_ID(spritelayout_8);
+	relative_coord(1, 1): THIS_ID(spritelayout_3);
+	relative_coord(1, 2): THIS_ID(spritelayout_1);
+	relative_coord(2, 0): THIS_ID(spritelayout_6);
+	relative_coord(2, 1): THIS_ID(spritelayout_0);
+	relative_coord(2, 2): THIS_ID(spritelayout_2);
+	relative_coord(3, 0): THIS_ID(spritelayout_7);
+	relative_coord(3, 1): THIS_ID(spritelayout_7);
+	relative_coord(3, 2): THIS_ID(spritelayout_5);
+	THIS_ID(spritelayout_0);
+}
+
+switch(FEAT_INDUSTRYTILES, PARENT, THIS_ID(layout), layout_num) {
+	1: THIS_ID(layout_1);
+	THIS_ID(spritelayout_5);
+}
+
+/* *************************************************
+ * Definition of the industry tile and its callbacks
+ * *************************************************/
+
+TILE_DISALLOW_NEARBY_CLASS(nearby_industry, TILE_CLASS_INDUSTRY, CB_RESULT_LOCATION_DISALLOW, return CB_RESULT_LOCATION_ALLOW)
+TILE_ALLOW_PLAYER         (player_check,                                                            THIS_ID(nearby_industry))
+TILE_DISALLOW_SLOPES      (location_check,                       CB_RESULT_LOCATION_DISALLOW, THIS_ID(player_check))
+
+item(FEAT_INDUSTRYTILES, THIS_ID(tile), TILE_SUGARREFINERY_1) {
+	property {
+		substitute:       0;
+		accepted_cargos:  [[SGBT, 8], [MNSP, 8]];
+		land_shape_flags: bitmask(LSF_ONLY_ON_FLAT_LAND);
+	}
+
+	/* Economy specific tile acceptance */
+	TILE_CARGO_2(ENABLE_SUGARCANE && ENABLE_MNSP, SGCN, MNSP)
+
+	graphics {
+		tile_check:   THIS_ID(location_check);
+		THIS_ID(layout);
+	}
+}
+
+/* *************************************************
+ * Definition of the industry layouts
+ * *************************************************/
+
+tilelayout tilelayout_sugar_refinery_1 {
+	0, 0: THIS_ID(tile);
+	0, 1: THIS_ID(tile);
+	0, 2: THIS_ID(tile);
+	1, 0: THIS_ID(tile);
+	1, 1: THIS_ID(tile);
+	1, 2: THIS_ID(tile);
+	2, 0: THIS_ID(tile);
+	2, 1: THIS_ID(tile);
+	2, 2: THIS_ID(tile);
+	3, 0: THIS_ID(tile);
+	3, 1: THIS_ID(tile);
+	3, 2: THIS_ID(tile);
+}
+
+/* *************************************************
+ * Definition of the industry
+ * *************************************************/
+
+/* for secondary production template */
+#define THIS_NUM_OUTPUT_CARGOS    1
+#define THIS_PROD_RATIO_CARGO1    3
+#define THIS_PROD_RATIO_CARGO2    5
+#define THIS_PROD_RATIO_CARGO3    0
+#define THIS_BOOST_12             3
+#define THIS_BOOST_13             0
+#define THIS_BOOST_21             5
+#define THIS_BOOST_23             0
+#define THIS_BOOST_31             0
+#define THIS_BOOST_32             0
+/* extra text template */
+#define THIS_STR_EXTRA_TEXT       STR_EXTRA_SUGAR_REFINERY
+#define THIS_STR_DEBUG_TEXT       STR_EXTRA_TEXT_DEBUG_SECONDARY
+/* availability years - also update available from strings if changing these */
+
+
+CHECK_INCOMPATIBLE(sugar_refinery, 56, CB_RESULT_LOCATION_DISALLOW, return CB_RESULT_LOCATION_ALLOW)
+CHECK_INCOMPATIBLE(arable_farm,    16, CB_RESULT_LOCATION_DISALLOW, THIS_ID(sugar_refinery))
+CHECK_FOUNDER     (THIS_ID(arable_farm))
+
+SWITCH_COLOUR_SCHEME1(THIS_ID(colour))
+
+#include "../templates/produce_secondary.pnml"
+#include "../templates/check_secondary_production_level.pnml"
+#include "../templates/check_secondary_closure.pnml"
+
+#include "../templates/extra_text_secondary.pnml"
+
+#include "../templates/check_availability.pnml"
+
+
+item(FEAT_INDUSTRIES, sugar_refinery, IND_SUGARREFINERY_ID) {
+	property {
+		substitute:             0;
+		layouts: [
+				tilelayout_sugar_refinery_1,
+			];
+		life_type:              4;
+		name:                   string(STR_IND_SUGAR_REFINERY);
+		nearby_station_name:    string(STR_STATION, string(STR_TOWN), string(STR_IND_SUGAR_REFINERY));
+		closure_msg:            TTD_STR_NEWS_INDUSTRY_CLOSURE_SUPPLY_PROBLEMS;
+		prod_increase_msg:      TTD_STR_NEWS_INDUSTRY_PRODUCTION_INCREASE_GENERAL;
+		prod_decrease_msg:      TTD_STR_NEWS_INDUSTRY_PRODUCTION_DECREASE_GENERAL;
+		new_ind_msg:            TTD_STR_NEWS_INDUSTRY_CONSTRUCTION;
+		prod_cargo_types:       [FOOD];
+		accept_cargo_types:     [MNSP, SGBT];
+		prod_multiplier:        [0, 0];
+		input_multiplier_1:     [0, 0];
+		input_multiplier_2:     [0, 0];
+		input_multiplier_3:     [0, 0];
+		min_cargo_distr:        5;
+		conflicting_ind_types:  [];
+		prob_random:            5;
+		prob_in_game:           3;
+		prospect_chance:        0.75;
+		fund_cost_multiplier:   140;
+		map_colour:             83;
+		remove_cost_multiplier: 0;
+		spec_flags:             bitmask(IND_FLAG_MILITARY_AIRPLANE_CAN_EXPLODE);
+	}
+
+	/* Economy specific cargo */
+	INDUSTRY_INPUT_CARGO_2(ENABLE_SUGARCANE && ENABLE_MNSP, MNSP, SGCN)
+
+	graphics {
+		produce_cargo_arrival:   THIS_ID(produce);
+		construction_probability:THIS_ID(check_availability);
+		location_check:          THIS_ID(check_location);
+		monthly_prod_change:     THIS_ID(check_production_level);
+		random_prod_change:      THIS_ID(check_closure);
+		extra_text_industry:     THIS_ID(extra_text);
+		extra_text_fund:         return string(STR_FUND_AVAILABLE_FROM, string(STR_FUND_AVAILABLE_FROM_DATE_SUGAR_REFINERY));
+		colour:                  THIS_ID(colour);
+	}
+}
+
+#include "../templates/undefs.pnml"

@@ -1,0 +1,241 @@
+/*
+ * This file is part of FIRS Industry Set for OpenTTD.
+ * FIRS is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
+ * FIRS is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with FIRS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include "../templates/spritelayout_templates.pnml"
+
+#define THIS_ID(...) stockyard ## __VA_ARGS__
+
+spriteset(THIS_ID(spriteset_ground), "sprites/graphics/industries/groundtiles.png") {
+	tmpl_ground_tile(80, 10)
+	tmpl_ground_tile(80, 10)
+}
+
+spriteset(THIS_ID(spriteset_1)) {
+	tmpl_building_sprite_filename(10, 10, 44, -13, "sprites/graphics/industries/stockyard.png")
+	tmpl_building_sprite_filename(10, 10, 44, -13, "sprites/graphics/industries/stockyard_snow.png")
+}
+
+spriteset(THIS_ID(spriteset_2)) {
+	tmpl_building_sprite_filename(80, 10, 74, -43, "sprites/graphics/industries/stockyard.png")
+	tmpl_building_sprite_filename(80, 10, 74, -43, "sprites/graphics/industries/stockyard_snow.png")
+}
+
+spriteset(THIS_ID(spriteset_3)) {
+	tmpl_building_sprite_filename(150, 10, 88, -57, "sprites/graphics/industries/stockyard.png")
+	tmpl_building_sprite_filename(150, 10, 88, -57, "sprites/graphics/industries/stockyard_snow.png")
+}
+
+spriteset(THIS_ID(spriteset_4)) {
+	tmpl_building_sprite_filename(220, 10, 85, -54, "sprites/graphics/industries/stockyard.png")
+	tmpl_building_sprite_filename(220, 10, 85, -54, "sprites/graphics/industries/stockyard_snow.png")
+}
+
+spriteset(THIS_ID(spriteset_5)) {
+	tmpl_building_sprite_filename(290, 10, 104, -73, "sprites/graphics/industries/stockyard.png")
+	tmpl_building_sprite_filename(290, 10, 104, -73, "sprites/graphics/industries/stockyard_snow.png")
+}
+
+spriteset(THIS_ID(spriteset_6)) {
+	tmpl_building_sprite_filename(360, 10, 91, -60, "sprites/graphics/industries/stockyard.png")
+	tmpl_building_sprite_filename(360, 10, 91, -60, "sprites/graphics/industries/stockyard_snow.png")
+}
+
+spriteset(THIS_ID(spriteset_7)) {
+	tmpl_building_sprite_filename(430, 10, 98, -67, "sprites/graphics/industries/stockyard.png")
+	tmpl_building_sprite_filename(430, 10, 98, -67, "sprites/graphics/industries/stockyard_snow.png")
+}
+
+spriteset(THIS_ID(spriteset_8)) {
+	tmpl_building_sprite_filename(500, 10, 54, -23, "sprites/graphics/industries/stockyard.png")
+	tmpl_building_sprite_filename(500, 10, 54, -23, "sprites/graphics/industries/stockyard_snow.png")
+}
+
+spriteset(THIS_ID(spriteset_9)) {
+	tmpl_building_sprite_filename(570, 10, 76, -45, "sprites/graphics/industries/stockyard.png")
+	tmpl_building_sprite_filename(570, 10, 76, -45, "sprites/graphics/industries/stockyard_snow.png")
+}
+
+spriteset(THIS_ID(spriteset_10)) {
+	tmpl_building_sprite_filename(640, 10, 32, -1, "sprites/graphics/industries/stockyard.png")
+	tmpl_building_sprite_filename(640, 10, 32, -1, "sprites/graphics/industries/stockyard_snow.png")
+}
+
+spriteset(THIS_ID(spriteset_11)) {
+	tmpl_building_sprite_filename(710, 10, 49, -18, "sprites/graphics/industries/stockyard.png")
+	tmpl_building_sprite_filename(710, 10, 49, -18, "sprites/graphics/industries/stockyard_snow.png")
+}
+
+SPRITELAYOUT_NORMAL_SNOW(THIS_ID(spritelayout_1), THIS_ID(spriteset_ground), THIS_ID(spriteset_ground), THIS_ID(spriteset_1), 32)
+
+SPRITELAYOUT_NORMAL_SNOW(THIS_ID(spritelayout_2), THIS_ID(spriteset_ground), THIS_ID(spriteset_ground), THIS_ID(spriteset_2), 32)
+
+SPRITELAYOUT_NORMAL_SNOW(THIS_ID(spritelayout_3), THIS_ID(spriteset_ground), THIS_ID(spriteset_ground), THIS_ID(spriteset_3), 32)
+
+SPRITELAYOUT_NORMAL_SNOW(THIS_ID(spritelayout_4), THIS_ID(spriteset_ground), THIS_ID(spriteset_ground), THIS_ID(spriteset_4), 32)
+
+SPRITELAYOUT_NORMAL_SNOW(THIS_ID(spritelayout_5), THIS_ID(spriteset_ground), THIS_ID(spriteset_ground), THIS_ID(spriteset_5), 96)
+
+SPRITELAYOUT_NORMAL_SNOW(THIS_ID(spritelayout_6), THIS_ID(spriteset_ground), THIS_ID(spriteset_ground), THIS_ID(spriteset_6), 64)
+
+SPRITELAYOUT_NORMAL_SNOW(THIS_ID(spritelayout_7), THIS_ID(spriteset_ground), THIS_ID(spriteset_ground), THIS_ID(spriteset_7), 64)
+
+SPRITELAYOUT_NORMAL_SNOW(THIS_ID(spritelayout_8), THIS_ID(spriteset_ground), THIS_ID(spriteset_ground), THIS_ID(spriteset_8), 48)
+
+SPRITELAYOUT_NORMAL_SNOW(THIS_ID(spritelayout_9), THIS_ID(spriteset_ground), THIS_ID(spriteset_ground), THIS_ID(spriteset_9), 48)
+
+SPRITELAYOUT_NORMAL_SNOW(THIS_ID(spritelayout_10), THIS_ID(spriteset_ground), THIS_ID(spriteset_ground), THIS_ID(spriteset_10), 48)
+
+SPRITELAYOUT_NORMAL_SNOW(THIS_ID(spritelayout_11), THIS_ID(spriteset_ground), THIS_ID(spriteset_ground), THIS_ID(spriteset_11), 8)
+
+SPRITELAYOUT_GROUND_NORMAL_SNOW(THIS_ID(spritelayout_concrete), THIS_ID(spriteset_ground), THIS_ID(spriteset_ground))
+
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(layout_1), relative_pos) {
+	relative_coord(0, 0): THIS_ID(spritelayout_concrete);
+	relative_coord(0, 1): THIS_ID(spritelayout_concrete);
+	relative_coord(0, 3): THIS_ID(spritelayout_concrete);
+	relative_coord(1, 0): THIS_ID(spritelayout_concrete);
+	relative_coord(1, 1): THIS_ID(spritelayout_8);
+	relative_coord(1, 2): THIS_ID(spritelayout_9);
+	relative_coord(1, 3): THIS_ID(spritelayout_10);
+	relative_coord(4, 0): THIS_ID(spritelayout_1);
+	relative_coord(4, 1): THIS_ID(spritelayout_2);
+	relative_coord(4, 2): THIS_ID(spritelayout_3);
+	relative_coord(4, 3): THIS_ID(spritelayout_4);
+	relative_coord(3, 0): THIS_ID(spritelayout_concrete);
+	relative_coord(3, 1): THIS_ID(spritelayout_5);
+	relative_coord(3, 2): THIS_ID(spritelayout_6);
+	relative_coord(3, 3): THIS_ID(spritelayout_7);
+	THIS_ID(spritelayout_11);
+}
+
+switch(FEAT_INDUSTRYTILES, PARENT, THIS_ID(layout), layout_num) {
+	THIS_ID(layout_1);
+}
+
+/* *************************************************
+ * Definition of the industry tile and its callbacks
+ * *************************************************/
+
+TILE_DISALLOW_NEARBY_CLASS(nearby_industry, TILE_CLASS_INDUSTRY, CB_RESULT_LOCATION_DISALLOW, return CB_RESULT_LOCATION_ALLOW)
+TILE_ALLOW_PLAYER         (player_check,                                                            THIS_ID(nearby_industry))
+TILE_DISALLOW_SLOPES      (location_check,                       CB_RESULT_LOCATION_DISALLOW, THIS_ID(player_check))
+
+item(FEAT_INDUSTRYTILES, THIS_ID(tile), TILE_STOCKYARD_1) {
+	property {
+		substitute: 0;
+		accepted_cargos: [[LVST, 8], [MNSP, 8]];
+		land_shape_flags: bitmask(LSF_ONLY_ON_FLAT_LAND);
+	}
+
+	graphics {
+		tile_check:   THIS_ID(location_check);
+		THIS_ID(layout);
+	}
+}
+
+/* *************************************************
+ * Definition of the industry layouts
+ * *************************************************/
+
+tilelayout tilelayout_stockyard_1 {
+	0, 1: THIS_ID(tile);
+	0, 2: THIS_ID(tile);
+	0, 3: THIS_ID(tile);
+	1, 1: THIS_ID(tile);
+	1, 2: THIS_ID(tile);
+	1, 3: THIS_ID(tile);
+	3, 0: THIS_ID(tile);
+	3, 1: THIS_ID(tile);
+	3, 2: THIS_ID(tile);
+	3, 3: THIS_ID(tile);
+	4, 0: THIS_ID(tile);
+	4, 1: THIS_ID(tile);
+	4, 2: THIS_ID(tile);
+	4, 3: THIS_ID(tile);
+	0, 0: THIS_ID(tile);
+	1, 0: THIS_ID(tile);
+}
+
+/* *************************************************
+ * Definition of the industry
+ * *************************************************/
+
+/* for secondary production template */
+#define THIS_NUM_OUTPUT_CARGOS    1
+#define THIS_PROD_RATIO_CARGO1    3
+#define THIS_PROD_RATIO_CARGO2    5
+#define THIS_PROD_RATIO_CARGO3    0
+#define THIS_BOOST_12             3
+#define THIS_BOOST_13             0
+#define THIS_BOOST_21             5
+#define THIS_BOOST_23             0
+#define THIS_BOOST_31             0
+#define THIS_BOOST_32             0
+/* extra text template */
+#define THIS_STR_EXTRA_TEXT       STR_EXTRA_MEAT_PACKER
+#define THIS_STR_DEBUG_TEXT       STR_EXTRA_TEXT_DEBUG_SECONDARY
+/* availability years - also update available from strings if changing these */
+
+
+CHECK_INCOMPATIBLE  (stockyard,     56, CB_RESULT_LOCATION_DISALLOW, return CB_RESULT_LOCATION_ALLOW)
+CHECK_INCOMPATIBLE  (dairy_farm,    16, CB_RESULT_LOCATION_DISALLOW, THIS_ID(stockyard))
+CHECK_INCOMPATIBLE  (sheep_farm,    16, CB_RESULT_LOCATION_DISALLOW, THIS_ID(dairy_farm))
+CHECK_INCOMPATIBLE  (mixed_farm,    16, CB_RESULT_LOCATION_DISALLOW, THIS_ID(sheep_farm))
+CHECK_FOUNDER       (THIS_ID(mixed_farm))
+
+SWITCH_COLOUR_SCHEME1(THIS_ID(colour))
+
+#include "../templates/produce_secondary.pnml"
+#include "../templates/check_secondary_production_level.pnml"
+#include "../templates/check_secondary_closure.pnml"
+
+#include "../templates/extra_text_secondary.pnml"
+
+#include "../templates/check_availability.pnml"
+
+item(FEAT_INDUSTRIES, stockyard, IND_STOCKYARD_ID) {
+	property {
+		substitute: 0;
+		layouts: [
+				tilelayout_stockyard_1
+			];
+		life_type:              IND_LIFE_TYPE_PROCESSING;
+		closure_msg:            TTD_STR_NEWS_INDUSTRY_CLOSURE_SUPPLY_PROBLEMS;
+		prod_increase_msg:      TTD_STR_NEWS_INDUSTRY_PRODUCTION_INCREASE_GENERAL;
+		prod_decrease_msg:      TTD_STR_NEWS_INDUSTRY_PRODUCTION_DECREASE_GENERAL;
+		new_ind_msg:            TTD_STR_NEWS_INDUSTRY_CONSTRUCTION;
+		name:                   string(STR_IND_STOCKYARD);
+		nearby_station_name:    string(STR_STATION, string(STR_TOWN), string(STR_IND_STOCKYARD));
+		prod_cargo_types: [FOOD];
+		accept_cargo_types: [MNSP, LVST];
+		prod_multiplier: [0, 0];
+		input_multiplier_1: [0, 0];
+		input_multiplier_2: [0, 0];
+		input_multiplier_3: [0, 0];
+		min_cargo_distr: 5;
+		conflicting_ind_types: [];
+		prob_random: 5;
+		prob_in_game: 3;
+		prospect_chance: 0.75;
+		fund_cost_multiplier: 145;
+		map_colour: 176;
+		remove_cost_multiplier: 0;
+		spec_flags:             bitmask(IND_FLAG_MILITARY_HELICOPTER_CAN_EXPLODE);
+	}
+	graphics {
+		produce_cargo_arrival:   THIS_ID(produce);
+		construction_probability:THIS_ID(check_availability);
+		location_check:          THIS_ID(check_location);
+		monthly_prod_change:     THIS_ID(check_production_level);
+		random_prod_change:      THIS_ID(check_closure);
+		extra_text_industry:     THIS_ID(extra_text);
+		extra_text_fund:         return string(STR_FUND_AVAILABLE_FROM, string(STR_FUND_AVAILABLE_FROM_DATE_STOCKYARD));
+		colour:                  THIS_ID(colour);
+	}
+}
+
+#include "../templates/undefs.pnml"

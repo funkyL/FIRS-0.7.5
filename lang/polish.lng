@@ -1,0 +1,281 @@
+##grflangid 0x30
+##plural 7
+##gender m f n
+##case d c b n m w
+
+STR_GRF_DESC                                                                    :{ORANGE}FIRS Industry Replacement Set{}{BLACK}Autorzy: andythenorth, FooBar, planetmaker, Terkhen, Yexo i inni. {SILVER}Więcej informacji w pliku readme. {BLACK}Licencja: GPL v2.
+STR_GRF_NAME                                                                    :{TITLE}
+STR_GRF_URL                                                                     :http://dev.openttdcoop.org/projects/firs
+
+STR_PARAM_DESC_COAST_DISTANCE_MARINE_INDUSTRY                                   :Maksymalna odległość od linii brzegowej dla łowisk, platform wiertniczych i pogłębiarek.
+STR_PARAM_DESC_STAT_RATING                                                      :Ocena stacji uzależniona jest od ilości ładunku dostarczonego przez przemysł; im więcej dostarczono, tym wyższa ocena.
+STR_PARAM_DESC_DEBUG                                                            :Tylko dla deweloperów
+STR_PARAM_DESC_ECONOMIES                                                        :FIRS docelowo ma składać się z kilku ekonomii różniących się przedsiębiorstwami, towarami i cenami. {}{}{SILVER}Na razie tylko jedna ekonomia jest dostępna :)
+STR_PARAM_DESC_NEVER_CLOSE                                                      :Domyślnie kopalnie i farmy nie upadają.{}{}Jeżeli parametr jest włączony, przedsiebiorstwo upada, jeśli jego produkcja zejdzie do zbyt niskiego poziomu. {SILVER}Parametr 'Pozwalaj na spadek produkcji w kopalniach i farmach' musi być włączony.
+STR_PARAM_DESC_NO_OPENINGS                                                      :Domyślnie nowe przedsiębiorstwa powstają w trakcie gry.{}{}Jeśli parametr jest włączony to zakłady nie będą otwierane, a gracz nie będzie miał możliwości ich fundowania.
+STR_PARAM_DESC_PRIMARY_PRODUCTION_DECREASE                                      :Domyślnie produkcja w kopalniach i farmach nie spada.{}{}Jeżeli parametr jest włączony, produkcja może się zmniejszyć jeśli nie dostarczy się odpowiednich zasobów. Im wyższa produkcja, tym większa szansa na jej zmniejszenie.
+STR_PARAM_DESC_SECONDARY_NEVER_CLOSE                                            :Domyślnie przedsiębiorstwa przetwórcze nie upadają.{}{}Jeśli parametr jest włączony, spółki do których nie dostarcza się towarów upadają po pewnym czasie.
+STR_PARAM_NAME_COAST_DISTANCE_MARINE_INDUSTRY                                   :Maksymalny dystans przedsiębiorstw morskich od wybrzeża
+STR_PARAM_NAME_DEBUG                                                            :Tryb debugowania
+STR_PARAM_NAME_ECONOMIES                                                        :Ekonomia
+STR_PARAM_NAME_NEVER_CLOSE                                                      :Pozwalaj na upadłość kopalń i farm
+STR_PARAM_NAME_NO_OPENINGS                                                      :Zapobiegaj powstawaniu przedsiębiorstw
+STR_PARAM_NAME_PRIMARY_PRODUCTION_DECREASE                                      :Pozwalaj na spadek produkcji w kopalniach i farmach
+STR_PARAM_NAME_SECONDARY_NEVER_CLOSE                                            :Pozwalaj zakładom przetwórczym na upadłość
+STR_PARAM_VALUE_ECONOMIES_TEST_ECONOMY                                          :ekonomia testowa
+STR_PARAM_VALUE_SECONDARY_NEVER_CLOSE_0                                         :bez limitu
+STR_PARAM_NAME_STAT_RATING                                                      :System oceny stacji
+STR_PARAM_VALUE_STAT_RATING_DEFAULT                                             :domyślny
+STR_PARAM_VALUE_STAT_RATING_REDUCED_TIME                                        :ulepszony - zredukowany wpływ czasu od ostatniego odbioru ładunku
+STR_PARAM_VALUE_STAT_RATING_100                                                 :zawsze 100%
+
+
+STR_CARGO_NAME_ALCOHOL                                                          :{G=m}Alkohol
+STR_CARGO_NAME_ALCOHOL.d                                                        :alkoholu
+STR_CARGO_NAME_ALCOHOL.b                                                        :alkohol
+STR_CARGO_NAME_BAUXITE                                                          :{G=m}Boksyt
+STR_CARGO_NAME_BAUXITE.d                                                        :boksytu
+STR_CARGO_NAME_BAUXITE.b                                                        :boksyt
+STR_CARGO_NAME_BUILDING_MATERIALS                                               :{G=m}Materiały budowlane
+STR_CARGO_NAME_BUILDING_MATERIALS.d                                             :materiałów budowlanych
+STR_CARGO_NAME_BUILDING_MATERIALS.b                                             :materiały budowlane
+STR_CARGO_NAME_CHEMICALS                                                        :{G=n}Chemikalia
+STR_CARGO_NAME_CHEMICALS.d                                                      :chemikaliów
+STR_CARGO_NAME_CHEMICALS.b                                                      :chemikalia
+STR_CARGO_NAME_CLAY                                                             :{G=f}Glina
+STR_CARGO_NAME_CLAY.d                                                           :gliny
+STR_CARGO_NAME_CLAY.b                                                           :glinę
+STR_CARGO_NAME_ENGINEERING_SUPPLIES                                             :{G=f}Maszyny
+STR_CARGO_NAME_ENGINEERING_SUPPLIES.d                                           :maszyn
+STR_CARGO_NAME_ENGINEERING_SUPPLIES.b                                           :maszyny
+STR_CARGO_NAME_FIBRES                                                           :{G=n}Włókna naturalne
+STR_CARGO_NAME_FIBRES.d                                                         :włókien naturalnych
+STR_CARGO_NAME_FIBRES.b                                                         :włókna naturalne
+STR_CARGO_NAME_FISH                                                             :{G=f}Ryby
+STR_CARGO_NAME_FISH.d                                                           :ryb
+STR_CARGO_NAME_FISH.b                                                           :ryby
+STR_CARGO_NAME_FARM_SUPPLIES                                                    :{G=m}Sprzęt rolniczy
+STR_CARGO_NAME_FARM_SUPPLIES.d                                                  :sprzętu rolniczego
+STR_CARGO_NAME_FARM_SUPPLIES.b                                                  :sprzęt rolniczy
+STR_CARGO_NAME_FRUITS                                                           :{G=m}Owoce
+STR_CARGO_NAME_FRUITS.d                                                         :owoców
+STR_CARGO_NAME_FRUITS.b                                                         :owoce
+STR_CARGO_NAME_LUMBER                                                           :{G=f}Deski
+STR_CARGO_NAME_LUMBER.d                                                         :desek
+STR_CARGO_NAME_LUMBER.b                                                         :deski
+STR_CARGO_NAME_METAL                                                            :{G=m}Metal
+STR_CARGO_NAME_METAL.d                                                          :metalu
+STR_CARGO_NAME_METAL.b                                                          :metal
+STR_CARGO_NAME_MILK                                                             :{G=n}Mleko
+STR_CARGO_NAME_MILK.d                                                           :mleka
+STR_CARGO_NAME_MILK.b                                                           :mleko
+STR_CARGO_NAME_MANUFACTURING_SUPPLIES                                           :{G=n}Opakowania
+STR_CARGO_NAME_MANUFACTURING_SUPPLIES.d                                         :opakowań
+STR_CARGO_NAME_MANUFACTURING_SUPPLIES.b                                         :opakowania
+STR_CARGO_NAME_PETROL                                                           :{G=n}Paliwo
+STR_CARGO_NAME_PETROL.d                                                         :paliwa
+STR_CARGO_NAME_PETROL.b                                                         :paliwo
+STR_CARGO_NAME_RECYCLABLES                                                      :{G=m}Surowce wtórne
+STR_CARGO_NAME_RECYCLABLES.d                                                    :surowców wtórnych
+STR_CARGO_NAME_RECYCLABLES.b                                                    :surowce wtórne
+STR_CARGO_NAME_SAND                                                             :{G=m}Piasek
+STR_CARGO_NAME_SAND.d                                                           :piasku
+STR_CARGO_NAME_SAND.b                                                           :piasek
+STR_CARGO_NAME_SCRAP_METAL                                                      :{G=m}Złom
+STR_CARGO_NAME_SCRAP_METAL.d                                                    :złomu
+STR_CARGO_NAME_SCRAP_METAL.b                                                    :złom
+STR_CARGO_NAME_STONE                                                            :{G=m}Kamienie
+STR_CARGO_NAME_STONE.d                                                          :kamieni
+STR_CARGO_NAME_STONE.b                                                          :kamienie
+STR_CARGO_NAME_SUGAR_BEET                                                       :{G=m}Buraki cukrowe
+STR_CARGO_NAME_SUGAR_BEET.d                                                     :buraków cukrowych
+STR_CARGO_NAME_SUGAR_BEET.b                                                     :buraki cukrowe
+STR_CARGO_NAME_SUGARCANE                                                        :{G=f}Trzcina cukrowa
+STR_CARGO_NAME_SUGARCANE.d                                                      :trzciny cukrowej
+STR_CARGO_NAME_SUGARCANE.b                                                      :trzcinę cukrową
+STR_CARGO_NAME_WOOL                                                             :{G=f}Wełna
+STR_CARGO_NAME_WOOL.d                                                           :wełny
+STR_CARGO_NAME_WOOL.b                                                           :wełnę
+
+STR_CARGO_UNIT_ALCOHOL                                                          :{VOLUME} alkoholu
+STR_CARGO_UNIT_BAUXITE                                                          :{WEIGHT} boksytu
+STR_CARGO_UNIT_BUILDING_MATERIALS                                               :{WEIGHT} materiałów budowlanych
+STR_CARGO_UNIT_CHEMICALS                                                        :{VOLUME} chemikaliów
+STR_CARGO_UNIT_CLAY                                                             :{WEIGHT} gliny
+STR_CARGO_UNIT_ENGINEERING_SUPPLIES                                             :{SIGNED_WORD} skrzy{P 0 nia nie ń} maszyn
+STR_CARGO_UNIT_FIBRES                                                           :{WEIGHT} włókien naturalnych
+STR_CARGO_UNIT_FISH                                                             :{WEIGHT} ryb
+STR_CARGO_UNIT_FMSP                                                             :{SIGNED_WORD} skrzy{P 0 nia nie ń} sprzętu rolniczego
+STR_CARGO_UNIT_FRUITS                                                           :{WEIGHT} owoców
+STR_CARGO_UNIT_LUMBER                                                           :{WEIGHT} desek
+STR_CARGO_UNIT_METAL                                                            :{WEIGHT} metalu
+STR_CARGO_UNIT_MILK                                                             :{VOLUME} mleka
+STR_CARGO_UNIT_MNSP                                                             :{SIGNED_WORD} skrzy{P 0 nia nie ń} opakowań
+STR_CARGO_UNIT_PETROL                                                           :{VOLUME} paliwa
+STR_CARGO_UNIT_RECYCLABLES                                                      :{WEIGHT} surowców wtórnych
+STR_CARGO_UNIT_SAND                                                             :{WEIGHT} piasku
+STR_CARGO_UNIT_SCRAP_METAL                                                      :{WEIGHT} złomu
+STR_CARGO_UNIT_STONE                                                            :{WEIGHT} kamieni
+STR_CARGO_UNIT_SUGAR_BEET                                                       :{WEIGHT} buraków cukrowych
+STR_CARGO_UNIT_SUGARCANE                                                        :{WEIGHT} trzciny cukrowej
+STR_CARGO_UNIT_WOOL                                                             :{WEIGHT} wełny
+
+STR_CID_ALCOHOL                                                                 :{TINYFONT}AL
+STR_CID_BAUXITE                                                                 :{TINYFONT}BX
+STR_CID_BUILDING_MATERIALS                                                      :{TINYFONT}MB
+STR_CID_CHEMICALS                                                               :{TINYFONT}CH
+STR_CID_CLAY                                                                    :{TINYFONT}GL
+STR_CID_ENGINEERING_SUPPLIES                                                    :{TINYFONT}MS
+STR_CID_FARM_SUPPLIES                                                           :{TINYFONT}SR
+STR_CID_FIBRES                                                                  :{TINYFONT}WN
+STR_CID_FISH                                                                    :{TINYFONT}RB
+STR_CID_LUMBER                                                                  :{TINYFONT}DS
+STR_CID_MANUFACTURING_SUPPLIES                                                  :{TINYFONT}OP
+STR_CID_METAL                                                                   :{TINYFONT}MT
+STR_CID_MILK                                                                    :{TINYFONT}MK
+STR_CID_PETROL                                                                  :{TINYFONT}PW
+STR_CID_RECYCLABLES                                                             :{TINYFONT}SW
+STR_CID_SAND                                                                    :{TINYFONT}PK
+STR_CID_SCRAP_METAL                                                             :{TINYFONT}ZM
+STR_CID_STONE                                                                   :{TINYFONT}KM
+STR_CID_SUGAR_BEET                                                              :{TINYFONT}BC
+STR_CID_SUGARCANE                                                               :{TINYFONT}TC
+STR_CID_WOOL                                                                    :{TINYFONT}WE
+
+STR_ERR_CLIMATE_TOYLAND                                                         :{ORANGE}FIRS nie został zaprojektowany do użycia z klimatem zabawkowym
+STR_ERR_INCOMPATIBLE_SET                                                        :{ORANGE}E01: {YELLOW}Niekompatybilny zestaw: {ORANGE}{STRING} {YELLOW}Zobacz FIRS ReadMe: {ORANGE}{}http://bundles.openttdcoop.org/firs/releases/readme.txt
+STR_ERR_INCOMPATIBLE_PARAM_CANSET                                               :{ORANGE}E02: {YELLOW}Niekompatybilny parametr: {ORANGE}Parametr 2 CanSet musi być ustawiony na 0 by działać z FIRS. {YELLOW}Zobacz FIRS ReadMe: {ORANGE}{}http://bundles.openttdcoop.org/firs/releases/readme.txt
+STR_ERR_INCOMPATIBLE_PARAM_CITYSET                                              :{ORANGE}E02: {YELLOW}Niekompatybilny parametr: {ORANGE}Parametr 2 NA City Set musi być ustawiony na 0 by działać z FIRS. {YELLOW}Zobacz FIRS ReadMe: {ORANGE}{}http://bundles.openttdcoop.org/firs/releases/readme.txt
+STR_ERR_INCOMPATIBLE_SET_TTRS_VERSION                                           :{ORANGE}E04: {YELLOW}Niekompatybilna wersja: {ORANGE}Total Town Replacement Set musi być w wersji 3.11 lub nowszej. {YELLOW}Zobacz FIRS ReadMe: {ORANGE}{}http://bundles.openttdcoop.org/firs/releases/readme.txt
+STR_ERR_OPENTTD_VERSION                                                         :{ORANGE}E00: FIRS wymaga OpenTTD 1.2.0 / trunk r22780 lub nowszy. {YELLOW}Zobacz FIRS ReadMe: {ORANGE}{}http://bundles.openttdcoop.org/firs/releases/readme.txt
+
+STR_ERR_LOCATION_NOT_ABOVE_SNOWLINE                                             :musi być ustawione poniżej linii śniegu.
+STR_ERR_LOCATION_NOT_ON_WATER                                                   :musi być ustawione na suchym lądzie.
+STR_ERR_LOCATION_NOT_IN_DESERT                                                  :nie może być ustawione na pustyni.
+STR_ERR_LOCATION_NOT_ON_STEEP_SLOPE                                             :nie może być ustawione na stromym zboczu.
+
+STR_EXTRA_ALUMINUM_PLANT                                                        :{BLACK}Produkcja:{}  2t z 8t boksytu{}  2t z 8t chemikaliów{}  4t z 8t złomu{}{}Produkcja wzrasta, gdy różne surowce są dostarczane w ciągu miesiąca.
+STR_EXTRA_BIOREFINERY                                                           :{BLACK}Przerabia zboże i cukier na paliwo i chemikalia.{}{}6t z 8t surowców.
+STR_EXTRA_BREWERY                                                               :{BLACK}Produkcja:{}  3t z 8t opakowań{}  5t z 8t zboża{}  5t z 8t owoców{}{}Produkcja wzrasta, gdy opakowania są dostarczane najpóźniej miesiąc po surowcach.
+STR_EXTRA_BRICKWORKS                                                            :{BLACK}Produkcja:{}  2t z 8t węgla{}  2t z 8t piasku{}  4t z 8t gliny{}{}Produkcja wzrasta, gdy różne surowce są dostarczane w ciągu miesiąca.
+STR_EXTRA_CEMENT_PLANT                                                          :{BLACK}Produkcja:{}  2t z 8t węgla{}  2t z 8t gliny{}  4t z 8t kamieni{}{}Produkcja wzrasta, gdy różne surowce są dostarczane w ciągu miesiąca.
+STR_EXTRA_DAIRY                                                                 :{BLACK}Produkcja:{}  3t z 8t opakowań{}  5t z 8t mleka{}{}Produkcja wzrasta do 8t z 8t, gdy oba surowce są dostarczane w ciągu miesiąca.
+STR_EXTRA_ENGINEERING_SUPPLIES                                                  :{BLACK}Dostawy maszyn mogą zwiększyć produkcję.{}{YELLOW}  {COMMA} skrzy{P 0 nię nie ń} dostarczono w tym miesiącu
+STR_EXTRA_FARM_SUPPLIES                                                         :{BLACK}Dostawy sprzętu rolniczego mogą zwiększyć produkcję.{}{YELLOW}  {COMMA} skrzy{P 0 nię nie ń} dostarczono w tym miesiącu
+STR_EXTRA_FERTILIZER_PLANT                                                      :{BLACK}Produkują nawozy z chemikaliów.{}{}{WEIGHT_SHORT} z {VOLUME_SHORT} surowców.
+STR_EXTRA_FISHING_HARBOUR                                                       :{BLACK}Produkcja:{}  3t z 8t opakowań{}  5t z 8t ryb{}{}Produkcja wzrasta do 8t z 8t, gdy oba surowce są dostarczane w ciągu miesiąca.
+STR_EXTRA_FURNITURE_FACTORY                                                     :{BLACK}Produkcja:{}  3t z 8t opakowań{}  5t z 8t desek{}{}Produkcja wzrasta do 8t z 8t, gdy oba surowce są dostarczane w ciągu miesiąca.
+STR_EXTRA_GLASS_WORKS                                                           :{BLACK}Produkuje butelki, słoje, szyby i inne rzeczy ze szkła.{}{}{BLACK}Produkcja:{}  6t z 8t piasku{}  2t z 8t chemikaliów{}{}Produkcja wzrasta do 8t z 8t, gdy oba surowce są dostarczane w ciągu miesiąca.
+STR_EXTRA_GRAIN_MILL                                                            :{BLACK}Produkcja:{}  3t z 8t opakowań{}  5t z 8t zboża{}{}Produkcja wzrasta do 8t z 8t, gdy oba surowce są dostarczane w ciągu miesiąca.
+STR_EXTRA_IRON_WORKS                                                            :{BLACK}Produkcja:{}  2t z 8t drewna{}  2t z 8t rudy żelaza{}{}Produkcja wzrasta do 4t z 8t, gdy oba surowce są dostarczane w ciągu miesiąca.
+STR_EXTRA_LIME_KILN                                                             :{BLACK}Produkcja:{}  3t z 8t kamieni{}  3t z 8t węgla{}{}Produkcja wzrasta do 6t z 8t, gdy oba surowce są dostarczane w ciągu miesiąca.
+STR_EXTRA_LUMBER_YARD                                                           :{BLACK}Produkuje płoty, słupy itp.{}{}{BLACK}Produkcja:{}  2t z 8t chemikaliów{}  6t z 8t desek{}{}Produkcja wzrasta do 8t z 8t, gdy oba surowce są dostarczane w ciągu miesiąca.
+STR_EXTRA_MACHINE_SHOP                                                          :{BLACK}Produkuje różnego rodzaju maszyny.{}{}8t z 8t surowców.
+STR_EXTRA_MEAT_PACKER                                                           :{BLACK}Produkcja:{}  3t z 8t opakowań{}  5t z 8t żywca{}{}Produkcja wzrasta do 8t z 8t, gdy oba surowce są dostarczane w ciągu miesiąca.
+STR_EXTRA_METAL_FABRICATION_PLANT                                               :{BLACK}Produkują armaturę i różne elementy malowane.{}{}{BLACK}Produkcja:{}  2t z 8t chemikaliów{}  6t z 8t metalu{}{}Produkcja wzrasta do 8t z 8t, gdy oba surowce są dostarczane w ciągu miesiąca.
+STR_EXTRA_METAL_FOUNDRY                                                         :{BLACK}Produkują galwanizowane puszki, narzędzia i części.{}{}{BLACK}Produkcja:{}  2t z 8t chemikaliów{}  6t z 8t metalu{}{}Produkcja wzrasta do 8t z 8t, gdy oba surowce są dostarczane w ciągu miesiąca.
+STR_EXTRA_OIL_REFINERY                                                          :{BLACK}W procesie rafinacji produkuje paliwo i chemikalia.{}{}6t z 8t surowców.
+STR_EXTRA_PAPER_MILL                                                            :{BLACK}Przerabia drewno na papier i karton.{}{}{BLACK}Produkcja:{}  4t z 8t drewna{}  2t z 8t gliny{}  2t z 8t chemikaliów{}{}Produkcja wzrasta, gdy różne surowce są dostarczane w ciągu miesiąca.
+STR_EXTRA_PLASTICS_PLANT                                                        :{BLACK}Produkuje artykuły plastikowe na użytek przedsiębiorstw i gospodarstw domowych.{}{}6t z 8t surowców.
+STR_EXTRA_RECYCLING_PLANT                                                       :{BLACK}Przerabia surowce wtórne do ponownego wykorzystania w przemyśle.{}{}6t z 8t surowców.
+STR_EXTRA_RECYCLING_DEPOT                                                       :{BLACK}Poziom produkcji zależy od wielkości pobliskiego miasta.
+STR_EXTRA_SAWMILL                                                               :{BLACK}Drzewo się rżnie. Jest deska, jest sęk.{}{}6t z 8t surowców.
+STR_EXTRA_SMITHY_FORGE                                                          :{BLACK}Produkcja ręcznie kutych podków, narzędzi, bramek i innych drobnych metalowych przedmiotów.{}{}5t z 8t surowców.
+STR_EXTRA_STEELMILL                                                             :{BLACK}Produkcja:{}  2t z 8t rudy żelaza{}  2t z 8t węgla{}  4t z 8t złomu{}{}Produkcja wzrasta, gdy różne surowce są dostarczane w ciągu miesiąca.
+STR_EXTRA_SUGAR_REFINERY                                                        :{BLACK}Produkcja:{}  3t z 8t opakowań{}  5t z 8t buraków cukrowych{}{}Produkcja wzrasta do 8t z 8t, gdy oba surowce są dostarczane w ciągu miesiąca.
+STR_EXTRA_TEXTILE_MILL                                                          :{BLACK}Produkcja:{}  3t z 8t opakowań{}  5t z 8t wełny{}  5t z 8t włókien naturalnych{}{}Produkcja wzrasta, gdy opakowania są dostarczane najpóźniej miesiąc po surowcach.
+
+STR_EXTRA_TEXT_DEBUG_SECONDARY                                                  :{BLACK}--------- DEBUGOWANIE ---------{}Produkcja w tym miesiącu:{}Ładunek 1: {WHITE}{COMMA}{BLACK}{}Ładunek 2: {WHITE}{COMMA}{BLACK}{}Dni od ostatniej dostawy: {WHITE}{COMMA}{BLACK}
+STR_EXTRA_MAX_PRODUCTION                                                        :{BLACK}Osiągnięto maksymalny poziom produkcji
+STR_GENERIC_NEWLINE                                                             :{}
+
+STR_FUND_MIXED_FARM                                                             :{}{BLACK}Lokalizacja: {YELLOW}Nie może być budowane na śniegu, pustyni i stromych zboczach.
+STR_FUND_ARABLE_FARM                                                            :{}{BLACK}Lokalizacja: {YELLOW}Nie może być budowane na śniegu, pustyni i zboczach.
+STR_FUND_FOREST                                                                 :{}{BLACK}Lokalizacja: {YELLOW}Nie może być budowane na pustyni.
+STR_FUND_FRUIT_PLANTATION                                                       :{}{BLACK}Lokalizacja: {YELLOW}Nie może być budowane na śniegu.
+
+STR_TOWN                                                                        :{STRING}
+STR_STATION                                                                     :{STRING} {STRING}
+
+STR_IND_ALUMINIUM_PLANT                                                         :{G=f}Huta aluminium
+STR_IND_ALUMINIUM_PLANT.d                                                       :huty aluminium
+STR_IND_ARABLE_FARM                                                             :{G=n}Pole uprawne
+STR_IND_ARABLE_FARM.d                                                           :pola uprawnego
+STR_IND_BAUXITE_MINE                                                            :{G=f}Kopalnia boksytu
+STR_IND_BAUXITE_MINE.d                                                          :kopalni boksytu
+STR_IND_BIOREFINERY                                                             :{G=f}Biorafineria
+STR_IND_BIOREFINERY.d                                                           :biorafinerii
+STR_IND_BREWERY                                                                 :{G=m}Browar
+STR_IND_BREWERY.d                                                               :browaru
+STR_IND_BRICK_WORKS                                                             :{G=f}Cegielnia
+STR_IND_BRICK_WORKS.d                                                           :cegielni
+STR_IND_BUILDERS_YARD                                                           :{G=f}Spółka budowlana
+STR_IND_BUILDERS_YARD.d                                                         :spółki budowlanej
+STR_IND_CEMENT_PLANT                                                            :{G=f}Cementownia
+STR_IND_CEMENT_PLANT.d                                                          :cementowni
+STR_IND_CLAY_PIT                                                                :{G=f}Kopalnia gliny
+STR_IND_CLAY_PIT.d                                                              :kopalni gliny
+STR_IND_DAIRY                                                                   :{G=f}Mleczarnia
+STR_IND_DAIRY.d                                                                 :mleczarni
+STR_IND_DAIRYFARM                                                               :{G=f}Ferma krów
+STR_IND_DAIRYFARM.d                                                             :fermy krów
+STR_IND_DREDGING_SITE                                                           :{G=f}Pogłębiarka
+STR_IND_DREDGING_SITE.d                                                         :pogłębiarki
+STR_IND_FERTILISER_PLANT                                                        :{G=m}Zakłady chemiczne
+STR_IND_FERTILISER_PLANT.d                                                      :zakładu chemicznego
+STR_IND_FISHING_GROUND                                                          :{G=n}Łowisko
+STR_IND_FISHING_GROUND.d                                                        :łowiska
+STR_IND_FISHING_HARBOUR                                                         :{G=m}Port rybacki
+STR_IND_FISHING_HARBOUR.d                                                       :portu rybackiego
+STR_IND_FOOD_MARKET                                                             :{G=m}Sklep
+STR_IND_FOOD_MARKET.d                                                           :sklepu
+STR_IND_FURNITURE_FACTORY                                                       :{G=f}Fabryka mebli
+STR_IND_FURNITURE_FACTORY.d                                                     :fabryki mebli
+STR_IND_GLASS_WORKS                                                             :{G=f}Huta szkła
+STR_IND_GLASS_WORKS.d                                                           :huty szkła
+STR_IND_GRAIN_MILL                                                              :{G=f}Piekarnia
+STR_IND_GRAIN_MILL.d                                                            :piekarni
+STR_IND_HARDWARE_STORE                                                          :{G=m}Sklep przemysłowy
+STR_IND_HARDWARE_STORE.d                                                        :sklepu przemysłowego
+STR_IND_HOTEL                                                                   :{G=m}Hotel
+STR_IND_HOTEL.d                                                                 :hotelu
+STR_IND_IRON_WORKS                                                              :{G=m}Piec hutniczy
+STR_IND_IRON_WORKS.d                                                            :pieca hutniczego
+STR_IND_JUNKYARD                                                                :{G=n}Złomowisko
+STR_IND_JUNKYARD.d                                                              :złomowiska
+STR_IND_LIME_KILN                                                               :{G=m}Piec wapienny
+STR_IND_LIME_KILN.d                                                             :pieca wapiennego
+STR_IND_LUMBER_YARD                                                             :{G=f}Stolarnia
+STR_IND_LUMBER_YARD.d                                                           :stolarni
+STR_IND_MACHINE_SHOP                                                            :{G=f}Fabryka maszyn
+STR_IND_MACHINE_SHOP.d                                                          :fabryki maszyn
+STR_IND_METAL_FABRICATION_PLANT                                                 :{G=m}Zakłady metalowe
+STR_IND_METAL_FABRICATION_PLANT.d                                               :zakładu metalowego
+STR_IND_METAL_FOUNDRY                                                           :{G=m}Warsztaty
+STR_IND_METAL_FOUNDRY.d                                                         :warsztatu
+STR_IND_MIXEDFARM                                                               :{G=n}Gospdarstwo rolne
+STR_IND_MIXEDFARM.d                                                             :gospodarstwa rolnego
+STR_IND_PETROLPUMP                                                              :{G=f}Stacja paliw
+STR_IND_PETROLPUMP.d                                                            :stacji paliw
+STR_IND_PLASTICS_PLANT                                                          :{G=f}Fabryka tworzyw sztucznych
+STR_IND_PLASTICS_PLANT.d                                                        :fabryki tworzyw sztucznych
+STR_IND_QUARRY                                                                  :{G=m}Kamieniołomy
+STR_IND_QUARRY.d                                                                :kamieniołomu
+STR_IND_RECYCLING_DEPOT                                                         :{G=n}Wysypisko
+STR_IND_RECYCLING_DEPOT.d                                                       :wysypiska
+STR_IND_RECYCLING_PLANT                                                         :{G=f}Przetwórnia odpadów
+STR_IND_RECYCLING_PLANT.d                                                       :przetwórni odpadów
+STR_IND_SHEEPFARM                                                               :{G=f}Ferma owiec
+STR_IND_SHEEPFARM.d                                                             :fermy owiec
+STR_IND_SMITHY_FORGE                                                            :{G=f}Kuźnia
+STR_IND_SMITHY_FORGE.d                                                          :kuźni
+STR_IND_STOCKYARD                                                               :{G=f}Ubojnia
+STR_IND_STOCKYARD.d                                                             :ubojni
+STR_IND_SUGAR_REFINERY                                                          :{G=f}Cukrownia
+STR_IND_SUGAR_REFINERY.d                                                        :cukrowni
+STR_IND_SUPERMARKET                                                             :{G=m}Supermarket
+STR_IND_SUPERMARKET.d                                                           :supermarketu
+STR_IND_TEXTILE_MILL                                                            :{G=m}Zakłady odzieżowe
+STR_IND_TEXTILE_MILL.d                                                          :zakładu odzieżowego
+
+

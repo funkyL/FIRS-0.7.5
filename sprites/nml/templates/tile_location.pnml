@@ -1,0 +1,256 @@
+/*
+ * This file is part of FIRS Industry Set for OpenTTD.
+ * FIRS is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
+ * FIRS is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with FIRS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/* General remarks on the templates in this file
+ *
+ * There are three types of templates:
+ * - TILE_CHECK_XXX
+ * - TILE_ALLOW_XXX
+ * - TILE_DISALLOW_XXX
+ *
+ * Parameters and usage:
+ * TILE_CHECK_XXX   (name, <params>, if_positive, if_negative)
+ * TILE_ALLOW_XXX   (name, <params>, if_not_allowed)
+ * TILE_DISALLOW_XXX(name, <params>, error_text,  if_allowed)
+ *
+ * where
+ *    name:       is the name of the switch which WILL be expanded by THIS_ID(name)
+ *    <params>:   depend on the template
+ *    error_text: is a string or CB_RESULT_LOCATION_DISALLOW
+ *    if_positive, if_negative, if_not_allowed, if_allowed:
+ *                is the name of the next switch or a return value like
+ *                "return CB_RESULT_LOCATION_DISALLOW" or
+ *                "return CB_RESULT_LOCATION_ALLOW"
+ *
+ * List of templates:
+ * TILE_CHECK_HEIGHT         (name, minh, maxh,  inrange, outrange)
+ * TILE_CHECK_WATERCLASS     (name, class,       yes,     no)
+ * TILE_CHECK_WATER          (name,              water,   land)
+ * TILE_CHECK_FLAT           (name,              flat,    sloped)
+ *
+ * TILE_DISALLOW_COAST       (name,              errtext, next)
+ * TILE_DISALLOW_TERRAIN     (name, terraintype, errtext, next)
+ * TILE_DISALLOW_NEARBY_CLASS(name, class,       errtext, next)
+ * TILE_DISALLOW_STEEP_SLOPE (name,              errtext, next)
+ * TILE_DISALLOW_SLOPES      (name,              errtext, next)
+ *
+ * TILE_ALLOW_PLAYER         (name,                       next)
+ */
+
+
+/*
+ * Check that the tile for being in a certain height range
+ *
+ * switch name:  THIS_ID(name)
+ *               tilename ## name
+ *
+ * Parameters:
+ * name:         Name of this switch
+ * minh:         Minimum height to check for
+ * maxh:         Maximum height to check for
+ * inrange:      choice when in range:     name of next switch or return <value>
+ * outrange:     choice when out of range: name of next switch or return <value>
+ *        where <value> is a string, CB_RESULT_LOCATION_DISALLOW or CB_RESULT_LOCATION_ALLOW
+ */
+
+/* uses more efficient code for (nearby_tile_height(0,0) <= maxh) && (nearby_tile_height(0,0) >= minh) */
+#define TILE_CHECK_HEIGHT(name, minh, maxh, inrange, outrange) \
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(name), UCMP(nearby_tile_height(0, 0) - minh, maxh - minh)) { \
+	0..1: inrange; \
+	outrange; \
+}
+
+/*
+ * Check that the tile for having a specific water class
+ *
+ * switch name:  THIS_ID(name)
+ *               tilename ## name
+ *
+ * Parameters:
+ * name:         Name of this switch
+ * class:        Water class to check for
+ * yes:          choice when present:     name of next switch or return <value>
+ * no:           choice when not present: name of next switch or return <value>
+ *        where <value> is a string, CB_RESULT_LOCATION_DISALLOW or CB_RESULT_LOCATION_ALLOW
+ */
+
+#define TILE_CHECK_WATERCLASS(name, class, yes, no) \
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(name), nearby_tile_water_class(0,0) == class) { \
+	1: yes; \
+	no; \
+}
+
+/*
+ * Check that the tile for being a water tile
+ *
+ * switch name:  THIS_ID(name)
+ *               tilename ## name
+ *
+ * Parameters:
+ * name:         Name of this switch
+ * water:        water tile: name of next switch or return <value>
+ * land:         land tile:  name of next switch or return <value>
+ *        where <value> is a string, CB_RESULT_LOCATION_DISALLOW or CB_RESULT_LOCATION_ALLOW
+ */
+
+#define TILE_CHECK_WATER(name, water, land) \
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(name), nearby_tile_is_water(0, 0)) { \
+	1: water; \
+	land; \
+}
+
+/*
+ * Check that the tile itself is not a coast or water tile
+ *
+ * switch name:  THIS_ID(name)
+ *               tilename ## name
+ *
+ * Parameters:
+ * name:         Name of this switch
+ * errtext:      deny construction: text for error message or CB_RESULT_LOCATION_DISALLOW
+ * next:         allow construction: name of next switch or "return CB_RESULT_LOCATION_ALLOW"
+ */
+
+#define TILE_DISALLOW_COAST(name, errtext, next) \
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(name), nearby_tile_is_water(0, 0)) { \
+	1: return errtext; \
+	next; \
+}
+
+/*
+ * Check for all nearby tiles and the tile itself NOT being of a specific terrain type
+ *
+ * switch name:  THIS_ID(name)
+ *               tilename ## name
+ *
+ * Parameters:
+ * name:         Name of this switch
+ * class:        nearby tile type (TILETYPE_DESERT or similar)
+ * errtext:      deny construction: text for error message or CB_RESULT_LOCATION_DISALLOW
+ * next:         allow construction: name of next switch or "return CB_RESULT_LOCATION_ALLOW"
+ */
+
+#define TILE_DISALLOW_TERRAIN(name, terraintype, errtext, next) \
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(name), \
+			(nearby_tile_terrain_type( 1, -1) == terraintype) && \
+			(nearby_tile_terrain_type( 1,  0) == terraintype) && \
+			(nearby_tile_terrain_type( 1,  1) == terraintype) && \
+			(nearby_tile_terrain_type( 0, -1) == terraintype) && \
+			(nearby_tile_terrain_type( 0,  0) == terraintype) && \
+			(nearby_tile_terrain_type( 0,  1) == terraintype) && \
+			(nearby_tile_terrain_type(-1, -1) == terraintype) && \
+			(nearby_tile_terrain_type(-1,  0) == terraintype) && \
+			(nearby_tile_terrain_type(-1,  1) == terraintype) \
+		) { \
+	1: return errtext; \
+	next; \
+}
+
+/*
+ * Check for the nearby tiles NOT being of a specific class
+ *
+ * switch name:  THIS_ID(name)
+ *               tilename ## name
+ *
+ * Parameters:
+ * name:         Name of this switch
+ * class:        nearby tile class
+ * errtext:      deny construction: text for error message or CB_RESULT_LOCATION_DISALLOW
+ * next:         allow construction: name of next switch or "return CB_RESULT_LOCATION_ALLOW"
+ */
+
+#define TILE_DISALLOW_NEARBY_CLASS(name, class, errtext, next) \
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(name), \
+    (nearby_tile_class( 1,  1) == class) | \
+    (nearby_tile_class( 1,  0) == class) | \
+    (nearby_tile_class( 1, -1) == class) | \
+    (nearby_tile_class( 0, -1) == class) | \
+    (nearby_tile_class(-1, -1) == class) | \
+    (nearby_tile_class(-1,  0) == class) | \
+    (nearby_tile_class(-1,  1) == class) | \
+    (nearby_tile_class( 0,  1) == class)) { \
+    1: return errtext; \
+    next; \
+}
+
+/*
+ * Check whether a certain location is suitable for building the industry
+ * Restrictions apply only to industries funded by the game.
+ *
+ * switch name:  THIS_ID(name)
+ *               tilename ## name
+ *
+ * Parameters:
+ * name          name of this switch
+ * next          name of next switch or "return CB_RESULT_LOCATION_ALLOW"
+ */
+
+/* founder == FOUNDER_GAME means founded by the game, 0 .. 15 are player companies */
+#define TILE_ALLOW_PLAYER(name, next) \
+switch (FEAT_INDUSTRYTILES, PARENT, THIS_ID(name), ( \
+			(((extra_callback_info2 & 0xFF00) >> 8) == IND_CREATION_FUND) || \
+			(((extra_callback_info2 & 0xFF00) >> 8) == IND_CREATION_PROSPECT) \
+			) \
+		) { \
+	1: return CB_RESULT_LOCATION_ALLOW; \
+	next; \
+}
+
+/*
+ * Check that the tile itself is a flat tile
+ *
+ * switch name:  THIS_ID(name)
+ *               tilename ## name
+ *
+ * Parameters:
+ * name:         Name of this switch
+ * flat:         flat tile:    name of next switch or return <value>
+ * sloped:       sloped tile:  name of next switch or return <value>
+ *        where <value> is a string, CB_RESULT_LOCATION_DISALLOW or CB_RESULT_LOCATION_ALLOW
+ */
+
+#define TILE_CHECK_FLAT(name, flat, sloped) \
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(name), nearby_tile_slope(0,0) == SLOPE_FLAT) { \
+	1: flat; \
+	sloped; \
+}
+
+/*
+ * Check whether a tile is steep slope and only disallow construction in that case
+ *
+ * switch name:  THIS_ID(name)
+ *               tilename ## name
+ *
+ * Parameters:
+ * name          name of this switch
+ * errtext:      deny construction: text for error message or CB_RESULT_LOCATION_DISALLOW
+ * next          name of next switch or "return CB_RESULT_LOCATION_ALLOW"
+ */
+
+#define TILE_DISALLOW_STEEP_SLOPE(name, errtext, next) \
+switch (FEAT_INDUSTRYTILES, SELF, THIS_ID(name), nearby_tile_slope(0,0) & bitmask(IS_STEEP_SLOPE)) { \
+	0: next; \
+	return errtext; \
+}
+
+/*
+ * Check whether a tile is a flat tile and only allow construction in that case
+ *
+ * switch name:  THIS_ID(name)
+ *               tilename ## name
+ *
+ * Parameters:
+ * name          name of this switch
+ * errtext:      deny construction: text for error message or CB_RESULT_LOCATION_DISALLOW
+ * next          name of next switch or "return CB_RESULT_LOCATION_ALLOW"
+ */
+
+#define TILE_DISALLOW_SLOPES(name, errtext, next) \
+switch (FEAT_INDUSTRYTILES, SELF, THIS_ID(name), nearby_tile_slope(0,0) == SLOPE_FLAT) { \
+	1: next; \
+	return errtext; \
+}

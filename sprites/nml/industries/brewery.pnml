@@ -1,0 +1,237 @@
+/*
+ * This file is part of FIRS Industry Set for OpenTTD.
+ * FIRS is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
+ * FIRS is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with FIRS. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#define THIS_ID(...) brewery ## __VA_ARGS__
+
+spriteset(THIS_ID(spriteset_ground), "sprites/graphics/industries/groundtiles.png") {
+	tmpl_ground_tile(150, 10)
+	tmpl_ground_tile(150, 10)
+}
+
+spriteset(THIS_ID(spriteset_1)) {
+	tmpl_building_sprite_filename( 10, 60, 91, -60, "sprites/graphics/industries/brewery.png")
+	tmpl_building_sprite_filename( 10, 60, 91, -60, "sprites/graphics/industries/brewery_snow.png")
+}
+
+spriteset(THIS_ID(spriteset_2)) {
+	tmpl_building_sprite_filename( 80, 60, 91, -60, "sprites/graphics/industries/brewery.png")
+	tmpl_building_sprite_filename( 80, 60, 91, -60, "sprites/graphics/industries/brewery_snow.png")
+}
+
+spriteset(THIS_ID(spriteset_3)) {
+	tmpl_building_sprite_filename( 150, 60, 91, -60, "sprites/graphics/industries/brewery.png")
+	tmpl_building_sprite_filename( 150, 60, 91, -60, "sprites/graphics/industries/brewery_snow.png")
+}
+
+SPRITELAYOUT_NORMAL_SNOW_BEGIN(THIS_ID(spritelayout_1_anim), THIS_ID(spriteset_ground), THIS_ID(spriteset_ground), THIS_ID(spriteset_1), 7)
+	BUILDING_WHITE_SMOKE_SMALL(8, 0, 55)
+SPRITELAYOUT_END
+
+SPRITELAYOUT_NORMAL_SNOW(THIS_ID(spritelayout_2), THIS_ID(spriteset_ground), THIS_ID(spriteset_ground), THIS_ID(spriteset_2), 48)
+
+SPRITELAYOUT_NORMAL_SNOW(THIS_ID(spritelayout_3), THIS_ID(spriteset_ground), THIS_ID(spriteset_ground), THIS_ID(spriteset_3), 48)
+
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(layout_1), relative_pos) {
+	relative_coord(1, 0): THIS_ID(spritelayout_1_anim);
+	relative_coord(1, 2): THIS_ID(spritelayout_2);
+	THIS_ID(spritelayout_3);
+}
+
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(layout_2), relative_pos) {
+	relative_coord(1, 0): THIS_ID(spritelayout_2);
+	relative_coord(2, 0): THIS_ID(spritelayout_1_anim);
+	THIS_ID(spritelayout_3);
+}
+
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(layout_3), relative_pos) {
+	relative_coord(1, 0): THIS_ID(spritelayout_1_anim);
+	relative_coord(1, 1): THIS_ID(spritelayout_2);
+	THIS_ID(spritelayout_3);
+}
+
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(layout_4), relative_pos) {
+	relative_coord(0, 0): THIS_ID(spritelayout_1_anim);
+	relative_coord(2, 0): THIS_ID(spritelayout_2);
+	THIS_ID(spritelayout_3);
+}
+
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(layout_5), relative_pos) {
+	relative_coord(1, 0): THIS_ID(spritelayout_2);
+	relative_coord(1, 1): THIS_ID(spritelayout_2);
+	relative_coord(2, 0): THIS_ID(spritelayout_1_anim);
+	THIS_ID(spritelayout_3);
+}
+
+switch(FEAT_INDUSTRYTILES, PARENT, THIS_ID(tile_spritelayout), layout_num) {
+	1: THIS_ID(layout_1);
+	2: THIS_ID(layout_2);
+	3: THIS_ID(layout_3);
+	4: THIS_ID(layout_4);
+	5: THIS_ID(layout_5);
+	THIS_ID(layout_1);
+}
+
+/* *************************************************
+ * Definition of the industry tile and its callbacks
+ * *************************************************/
+
+TILE_DISALLOW_NEARBY_CLASS(tile_nearby_industry, TILE_CLASS_INDUSTRY, CB_RESULT_LOCATION_DISALLOW, return CB_RESULT_LOCATION_ALLOW)
+TILE_ALLOW_PLAYER         (tile_player_check,                                                            THIS_ID(tile_nearby_industry))
+TILE_DISALLOW_SLOPES      (tile_location_check,                       CB_RESULT_LOCATION_DISALLOW, THIS_ID(tile_player_check))
+
+/* Return a random animation frame from the extra_callback_info1 */
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(tile_anim_control), (extra_callback_info1 & 14)) {
+	0: return 0;
+	1: return 2;
+	2: return 4;
+	3: return 6;
+	4: return 8;
+	5: return 10;
+	6: return 12;
+	7: return 14;
+	8: return 16;
+	9: return 18;
+	10: return 20;
+	11: return 22;
+	12: return 24;
+	return CB_RESULT_NEXT_FRAME;
+}
+
+item(FEAT_INDUSTRYTILES, THIS_ID(tile), TILE_BREWERY_1) {
+	property {
+		substitute:         0;
+		accepted_cargos:    [[FRVG, 8], [GRAI, 8], [MNSP, 8]];
+		land_shape_flags:   bitmask(LSF_ONLY_ON_FLAT_LAND);
+		special_flags:      bitmask(INDTILE_FLAG_RANDOM_ANIMATION);
+		animation_info:     [ANIMATION_LOOPING, 71];
+		animation_speed:    2;
+		animation_triggers: bitmask(ANIM_TRIGGER_INDTILE_CONSTRUCTION_STATE);
+	}
+	graphics {
+		anim_control: THIS_ID(tile_anim_control);
+		tile_check:   THIS_ID(tile_location_check);
+		THIS_ID(tile_spritelayout);
+	}
+}
+
+/* *************************************************
+ * Definition of the industry layouts
+ * *************************************************/
+
+tilelayout tilelayout_brewery_1 {
+	0, 2: THIS_ID(tile);
+	1, 0: THIS_ID(tile);
+	1, 2: THIS_ID(tile);
+}
+
+tilelayout tilelayout_brewery_2 {
+	0, 0: THIS_ID(tile);
+	1, 0: THIS_ID(tile);
+	2, 0: THIS_ID(tile);
+}
+
+tilelayout tilelayout_brewery_3 {
+	0, 1: THIS_ID(tile);
+	1, 0: THIS_ID(tile);
+	1, 1: THIS_ID(tile);
+}
+
+tilelayout tilelayout_brewery_4 {
+	0, 0: THIS_ID(tile);
+	1, 0: THIS_ID(tile);
+	2, 0: THIS_ID(tile);
+}
+
+tilelayout tilelayout_brewery_5 {
+	0, 0: THIS_ID(tile);
+	0, 1: THIS_ID(tile);
+	1, 0: THIS_ID(tile);
+	1, 1: THIS_ID(tile);
+	2, 0: THIS_ID(tile);
+}
+
+/* *************************************************
+ * Definition of the industry
+ * *************************************************/
+
+/* for secondary production template */
+#define THIS_NUM_OUTPUT_CARGOS    1
+#define THIS_PROD_RATIO_CARGO1    3
+#define THIS_PROD_RATIO_CARGO2    5
+#define THIS_PROD_RATIO_CARGO3    5
+#define THIS_BOOST_12             3
+#define THIS_BOOST_13             3
+#define THIS_BOOST_21             2
+#define THIS_BOOST_23             0
+#define THIS_BOOST_31             2
+#define THIS_BOOST_32             0
+/* extra text template */
+#define THIS_STR_EXTRA_TEXT       STR_EXTRA_BREWERY
+#define THIS_STR_DEBUG_TEXT       STR_EXTRA_TEXT_DEBUG_SECONDARY
+
+
+CHECK_INCOMPATIBLE  (brewery,       56, CB_RESULT_LOCATION_DISALLOW, return CB_RESULT_LOCATION_ALLOW)
+CHECK_INCOMPATIBLE  (arable_farm,   16, CB_RESULT_LOCATION_DISALLOW, THIS_ID(brewery))
+CHECK_INCOMPATIBLE  (grain_mill,    16, CB_RESULT_LOCATION_DISALLOW, THIS_ID(arable_farm))
+CHECK_TOWN_DISTANCE (town_distance,  0, 64, THIS_ID(grain_mill))
+CHECK_FOUNDER       (THIS_ID(town_distance))
+
+SWITCH_COLOUR_SCHEME1(THIS_ID(colour))
+
+#include "../templates/produce_secondary.pnml"
+#include "../templates/check_secondary_production_level.pnml"
+#include "../templates/check_secondary_closure.pnml"
+
+#include "../templates/extra_text_secondary.pnml"
+
+#include "../templates/check_availability.pnml"
+
+item(FEAT_INDUSTRIES, brewery, IND_BREWERY_ID) {
+	property {
+		substitute: 0;
+		layouts: [
+				tilelayout_brewery_1,
+				tilelayout_brewery_2,
+				tilelayout_brewery_3,
+				tilelayout_brewery_4,
+				tilelayout_brewery_5
+			];
+		life_type:              IND_LIFE_TYPE_PROCESSING;
+		closure_msg:            TTD_STR_NEWS_INDUSTRY_CLOSURE_SUPPLY_PROBLEMS;
+		prod_increase_msg:      TTD_STR_NEWS_INDUSTRY_PRODUCTION_INCREASE_GENERAL;
+		prod_decrease_msg:      TTD_STR_NEWS_INDUSTRY_PRODUCTION_DECREASE_GENERAL;
+		new_ind_msg:            TTD_STR_NEWS_INDUSTRY_CONSTRUCTION;
+		name:                   string(STR_IND_BREWERY);
+		nearby_station_name:    string(STR_STATION, string(STR_TOWN), string(STR_IND_BREWERY));
+		prod_cargo_types: [BEER];
+		accept_cargo_types: [MNSP, FRVG, GRAI];
+		prod_multiplier: [0, 0];
+		input_multiplier_1: [0, 0];
+		input_multiplier_2: [0, 0];
+		input_multiplier_3: [0, 0];
+		min_cargo_distr: 5;
+		conflicting_ind_types: [];
+		prob_random: 5;
+		prob_in_game: 3;
+		prospect_chance: 0.75;
+		fund_cost_multiplier: 50;
+		map_colour: 191;
+		remove_cost_multiplier: 0;
+		spec_flags:             0;
+	}
+	graphics {
+		produce_cargo_arrival:   THIS_ID(produce);
+		construction_probability:THIS_ID(check_availability);
+		location_check:          THIS_ID(check_location);
+		monthly_prod_change:     THIS_ID(check_production_level);
+		random_prod_change:      THIS_ID(check_closure);
+		extra_text_industry:     THIS_ID(extra_text);
+		colour:                  THIS_ID(colour);
+	}
+}
+
+#include "../templates/undefs.pnml"

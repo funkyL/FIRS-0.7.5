@@ -1,0 +1,326 @@
+/*
+ * This file is part of FIRS industry set.
+ * FIRS industry set is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
+ * FIRS industry set is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with FIRS industry set. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include "../templates/spritelayout_templates.pnml"
+
+#define THIS_ID(...) textile_mill ## __VA_ARGS__
+
+spriteset(THIS_ID(spriteset_ground), "sprites/graphics/industries/groundtiles.png") {
+	tmpl_ground_tile(150, 10)
+	tmpl_ground_tile(150, 10)
+}
+
+spriteset(THIS_ID(spriteset_1)) {
+	tmpl_building_sprite_filename(10, 60, 103, -74, "sprites/graphics/industries/textilemill.png")
+	tmpl_building_sprite_filename(10, 60, 103, -74, "sprites/graphics/industries/textilemill_snow.png")
+}
+
+spriteset(THIS_ID(spriteset_2)) {
+	tmpl_building_sprite_filename(80, 60, 103, -72, "sprites/graphics/industries/textilemill.png")
+	tmpl_building_sprite_filename(80, 60, 103, -72, "sprites/graphics/industries/textilemill_snow.png")
+}
+
+spriteset(THIS_ID(spriteset_3)) {
+	tmpl_building_sprite_filename(150, 60, 103, -72, "sprites/graphics/industries/textilemill.png")
+	tmpl_building_sprite_filename(150, 60, 103, -72, "sprites/graphics/industries/textilemill_snow.png")
+}
+
+spriteset(THIS_ID(spriteset_4)) {
+	tmpl_building_sprite_filename(220, 60, 103, -72, "sprites/graphics/industries/textilemill.png")
+	tmpl_building_sprite_filename(220, 60, 103, -72, "sprites/graphics/industries/textilemill_snow.png")
+}
+
+spriteset(THIS_ID(spriteset_5)) {
+	tmpl_building_sprite_filename(290, 60, 103, -72, "sprites/graphics/industries/textilemill.png")
+	tmpl_building_sprite_filename(290, 60, 103, -72, "sprites/graphics/industries/textilemill_snow.png")
+}
+
+SPRITELAYOUT_NORMAL_SNOW_BEGIN(THIS_ID(spritelayout_1_anim), THIS_ID(spriteset_ground), THIS_ID(spriteset_ground), THIS_ID(spriteset_1), 7)
+	BUILDING_SMOKE_BIG(0, 9, 78)
+SPRITELAYOUT_END
+
+SPRITELAYOUT_NORMAL_SNOW(THIS_ID(spritelayout_2), THIS_ID(spriteset_ground), THIS_ID(spriteset_ground), THIS_ID(spriteset_2), 64)
+
+SPRITELAYOUT_NORMAL_SNOW(THIS_ID(spritelayout_3), THIS_ID(spriteset_ground), THIS_ID(spriteset_ground), THIS_ID(spriteset_3), 64)
+
+SPRITELAYOUT_NORMAL_SNOW(THIS_ID(spritelayout_4), THIS_ID(spriteset_ground), THIS_ID(spriteset_ground), THIS_ID(spriteset_4), 64)
+
+SPRITELAYOUT_NORMAL_SNOW(THIS_ID(spritelayout_5), THIS_ID(spriteset_ground), THIS_ID(spriteset_ground), THIS_ID(spriteset_5), 64)
+
+spritelayout THIS_ID(spritelayout_6) {
+	ground {
+		sprite: THIS_ID(spriteset_ground);
+		recolour_mode: RECOLOUR_REMAP;
+		palette: PALETTE_USE_DEFAULT;
+	}
+}
+
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(layout_1), relative_pos) {
+	relative_coord(0, 0): THIS_ID(spritelayout_3);
+	relative_coord(0, 1): THIS_ID(spritelayout_1_anim);
+	relative_coord(1, 0): THIS_ID(spritelayout_2);
+	relative_coord(1, 1): THIS_ID(spritelayout_5);
+	relative_coord(2, 0): THIS_ID(spritelayout_3);
+	relative_coord(2, 1): THIS_ID(spritelayout_3);
+	relative_coord(3, 0): THIS_ID(spritelayout_2);
+	relative_coord(3, 1): THIS_ID(spritelayout_2);
+	relative_coord(4, 0): THIS_ID(spritelayout_5);
+	relative_coord(4, 1): THIS_ID(spritelayout_4);
+	THIS_ID(spritelayout_6);
+}
+
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(layout_2), relative_pos) {
+	relative_coord(0, 0): THIS_ID(spritelayout_3);
+	relative_coord(0, 1): THIS_ID(spritelayout_4);
+	relative_coord(0, 2): THIS_ID(spritelayout_1_anim);
+	relative_coord(1, 0): THIS_ID(spritelayout_2);
+	relative_coord(1, 1): THIS_ID(spritelayout_6);
+	relative_coord(1, 2): THIS_ID(spritelayout_5);
+	relative_coord(2, 0): THIS_ID(spritelayout_5);
+	relative_coord(2, 1): THIS_ID(spritelayout_6);
+	THIS_ID(spritelayout_6);
+}
+
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(layout_3), relative_pos) {
+	relative_coord(0, 0): THIS_ID(spritelayout_3);
+	relative_coord(0, 1): THIS_ID(spritelayout_5);
+	relative_coord(1, 0): THIS_ID(spritelayout_2);
+	relative_coord(1, 1): THIS_ID(spritelayout_4);
+	relative_coord(2, 0): THIS_ID(spritelayout_1_anim);
+	THIS_ID(spritelayout_6);
+}
+
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(layout_4), relative_pos) {
+	relative_coord(0, 0): THIS_ID(spritelayout_3);
+	relative_coord(0, 1): THIS_ID(spritelayout_3);
+	relative_coord(1, 0): THIS_ID(spritelayout_2);
+	relative_coord(1, 1): THIS_ID(spritelayout_2);
+	relative_coord(2, 0): THIS_ID(spritelayout_5);
+	relative_coord(2, 1): THIS_ID(spritelayout_4);
+	relative_coord(3, 0): THIS_ID(spritelayout_3);
+	relative_coord(3, 1): THIS_ID(spritelayout_5);
+	relative_coord(4, 0): THIS_ID(spritelayout_2);
+	relative_coord(4, 1): THIS_ID(spritelayout_1_anim);
+	THIS_ID(spritelayout_6);
+}
+
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(layout_5), relative_pos) {
+	relative_coord(0, 0): THIS_ID(spritelayout_3);
+	relative_coord(0, 1): THIS_ID(spritelayout_3);
+	relative_coord(0, 2): THIS_ID(spritelayout_5);
+	relative_coord(0, 3): THIS_ID(spritelayout_5);
+	relative_coord(1, 0): THIS_ID(spritelayout_2);
+	relative_coord(1, 1): THIS_ID(spritelayout_2);
+	relative_coord(1, 2): THIS_ID(spritelayout_4);
+	relative_coord(1, 3): THIS_ID(spritelayout_1_anim);
+	THIS_ID(spritelayout_6);
+}
+
+switch(FEAT_INDUSTRYTILES, SELF, THIS_ID(layout_6), relative_pos) {
+	relative_coord(0, 0): THIS_ID(spritelayout_5);
+	relative_coord(0, 1): THIS_ID(spritelayout_3);
+	relative_coord(0, 2): THIS_ID(spritelayout_3);
+	relative_coord(1, 0): THIS_ID(spritelayout_5);
+	relative_coord(1, 1): THIS_ID(spritelayout_2);
+	relative_coord(1, 2): THIS_ID(spritelayout_2);
+	relative_coord(2, 0): THIS_ID(spritelayout_5);
+	relative_coord(2, 1): THIS_ID(spritelayout_1_anim);
+	relative_coord(2, 2): THIS_ID(spritelayout_4);
+	THIS_ID(spritelayout_6);
+}
+
+switch(FEAT_INDUSTRYTILES, PARENT, THIS_ID(layout), layout_num) {
+	1: THIS_ID(layout_1);
+	2: THIS_ID(layout_2);
+	3: THIS_ID(layout_3);
+	4: THIS_ID(layout_4);
+	5: THIS_ID(layout_5);
+	6: THIS_ID(layout_6);
+	THIS_ID(layout_1);
+}
+
+/* *************************************************
+ * Definition of the industry tile and its callbacks
+ * *************************************************/
+
+TILE_DISALLOW_NEARBY_CLASS(nearby_industry, TILE_CLASS_INDUSTRY, CB_RESULT_LOCATION_DISALLOW, return CB_RESULT_LOCATION_ALLOW)
+TILE_ALLOW_PLAYER         (player_check,                                                            THIS_ID(nearby_industry))
+TILE_DISALLOW_SLOPES      (location_check,                       CB_RESULT_LOCATION_DISALLOW, THIS_ID(player_check))
+
+item(FEAT_INDUSTRYTILES, THIS_ID(tile), TILE_TEXTILEMILL_1) {
+	property {
+		substitute:         0;
+		accepted_cargos:    [[MNSP, 8], [WOOL, 8], [FICR, 8]];
+		land_shape_flags:   bitmask(LSF_ONLY_ON_FLAT_LAND);
+		animation_info:     [ANIMATION_LOOPING, 7];
+		animation_speed:    3;
+		animation_triggers: bitmask(ANIM_TRIGGER_INDTILE_CONSTRUCTION_STATE);
+	}
+
+	graphics {
+		tile_check:   THIS_ID(location_check);
+		THIS_ID(layout);
+	}
+}
+
+/* *************************************************
+ * Definition of the industry layouts
+ * *************************************************/
+
+tilelayout tilelayout_textile_mill_1 {
+	0, 0: THIS_ID(tile);
+	0, 1: THIS_ID(tile);
+	1, 0: THIS_ID(tile);
+	1, 1: THIS_ID(tile);
+	2, 0: THIS_ID(tile);
+	2, 1: THIS_ID(tile);
+	3, 0: THIS_ID(tile);
+	3, 1: THIS_ID(tile);
+	4, 0: THIS_ID(tile);
+	4, 1: THIS_ID(tile);
+}
+
+tilelayout tilelayout_textile_mill_2 {
+	0, 0: THIS_ID(tile);
+	0, 1: THIS_ID(tile);
+	0, 2: THIS_ID(tile);
+	1, 0: THIS_ID(tile);
+	1, 1: THIS_ID(tile);
+	1, 2: THIS_ID(tile);
+	2, 0: THIS_ID(tile);
+	2, 1: THIS_ID(tile);
+	2, 2: THIS_ID(tile);
+}
+
+tilelayout tilelayout_textile_mill_3 {
+	0, 0: THIS_ID(tile);
+	0, 1: THIS_ID(tile);
+	1, 0: THIS_ID(tile);
+	1, 1: THIS_ID(tile);
+	2, 0: THIS_ID(tile);
+	2, 1: THIS_ID(tile);
+}
+
+tilelayout tilelayout_textile_mill_4 {
+	0, 0: THIS_ID(tile);
+	0, 1: THIS_ID(tile);
+	1, 0: THIS_ID(tile);
+	1, 1: THIS_ID(tile);
+	2, 0: THIS_ID(tile);
+	2, 1: THIS_ID(tile);
+	3, 0: THIS_ID(tile);
+	3, 1: THIS_ID(tile);
+	4, 0: THIS_ID(tile);
+	4, 1: THIS_ID(tile);
+}
+
+tilelayout tilelayout_textile_mill_5 {
+	0, 0: THIS_ID(tile);
+	0, 1: THIS_ID(tile);
+	0, 2: THIS_ID(tile);
+	0, 3: THIS_ID(tile);
+	1, 0: THIS_ID(tile);
+	1, 1: THIS_ID(tile);
+	1, 2: THIS_ID(tile);
+	1, 3: THIS_ID(tile);
+}
+
+tilelayout tilelayout_textile_mill_6 {
+	0, 0: THIS_ID(tile);
+	0, 1: THIS_ID(tile);
+	0, 2: THIS_ID(tile);
+	1, 0: THIS_ID(tile);
+	1, 1: THIS_ID(tile);
+	1, 2: THIS_ID(tile);
+	2, 0: THIS_ID(tile);
+	2, 1: THIS_ID(tile);
+	2, 2: THIS_ID(tile);
+}
+
+/* *************************************************
+ * Definition of the industry
+ * *************************************************/
+
+/* for secondary production template */
+#define THIS_NUM_OUTPUT_CARGOS    1
+#define THIS_PROD_RATIO_CARGO1    3
+#define THIS_PROD_RATIO_CARGO2    5
+#define THIS_PROD_RATIO_CARGO3    5
+#define THIS_BOOST_12             3
+#define THIS_BOOST_13             3
+#define THIS_BOOST_21             2
+#define THIS_BOOST_23             0
+#define THIS_BOOST_31             2
+#define THIS_BOOST_32             0
+/* extra text template */
+#define THIS_STR_EXTRA_TEXT       STR_EXTRA_TEXTILE_MILL
+#define THIS_STR_DEBUG_TEXT       STR_EXTRA_TEXT_DEBUG_SECONDARY
+/* availability years - also update available from strings if changing these */
+
+
+CHECK_INCOMPATIBLE  (textile_mill, 56, CB_RESULT_LOCATION_DISALLOW, return CB_RESULT_LOCATION_ALLOW)
+CHECK_INCOMPATIBLE  (mixed_farm,   16, CB_RESULT_LOCATION_DISALLOW, THIS_ID(textile_mill))
+CHECK_INCOMPATIBLE  (sheep_farm,   16, CB_RESULT_LOCATION_DISALLOW, THIS_ID(mixed_farm))
+CHECK_FOUNDER       (THIS_ID(sheep_farm))
+
+SWITCH_COLOUR_SCHEME1(THIS_ID(colour))
+
+#include "../templates/produce_secondary.pnml"
+#include "../templates/check_secondary_production_level.pnml"
+#include "../templates/check_secondary_closure.pnml"
+
+#include "../templates/extra_text_secondary.pnml"
+
+#include "../templates/check_availability.pnml"
+
+item(FEAT_INDUSTRIES, textile_mill, IND_TEXTILEMILL_ID) {
+	property {
+		substitute: 0;
+		layouts: [
+				tilelayout_textile_mill_1,
+				tilelayout_textile_mill_2,
+				tilelayout_textile_mill_3,
+				tilelayout_textile_mill_4,
+				tilelayout_textile_mill_5,
+				tilelayout_textile_mill_6
+			];
+		life_type:              IND_LIFE_TYPE_PROCESSING;
+		closure_msg:            TTD_STR_NEWS_INDUSTRY_CLOSURE_SUPPLY_PROBLEMS;
+		prod_increase_msg:      TTD_STR_NEWS_INDUSTRY_PRODUCTION_INCREASE_GENERAL;
+		prod_decrease_msg:      TTD_STR_NEWS_INDUSTRY_PRODUCTION_DECREASE_GENERAL;
+		new_ind_msg:            TTD_STR_NEWS_INDUSTRY_CONSTRUCTION;
+		name:                   string(STR_IND_TEXTILE_MILL);
+		nearby_station_name:    string(STR_STATION, string(STR_TOWN), string(STR_IND_TEXTILE_MILL));
+		prod_cargo_types: [GOOD];
+		accept_cargo_types: [MNSP, WOOL, FICR];
+		prod_multiplier: [0, 0];
+		input_multiplier_1: [0, 0];
+		input_multiplier_2: [0, 0];
+		input_multiplier_3: [0, 0];
+		min_cargo_distr: 5;
+		conflicting_ind_types: [];
+		prob_random: 8;
+		prob_in_game: 7;
+		prospect_chance: 0.75;
+		fund_cost_multiplier: 120;
+		map_colour: 37;
+		remove_cost_multiplier: 0;
+		spec_flags:             0;
+	}
+	graphics {
+		produce_cargo_arrival:   THIS_ID(produce);
+		construction_probability:THIS_ID(check_availability);
+		location_check:          THIS_ID(check_location);
+		monthly_prod_change:     THIS_ID(check_production_level);
+		random_prod_change:      THIS_ID(check_closure);
+		extra_text_industry:     THIS_ID(extra_text);
+		extra_text_fund:         return string(STR_FUND_AVAILABLE_FROM, string(STR_FUND_AVAILABLE_FROM_DATE_TEXTILE_MILL));
+		colour:                  THIS_ID(colour);
+	}
+}
+
+#include "../templates/undefs.pnml"

@@ -1,0 +1,120 @@
+/*
+ * This file is part of FIRS industry set.
+ * FIRS industry set is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
+ * FIRS industry set is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with FIRS industry set. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#define THIS_ID(...) dredgine_site ## __VA_ARGS__
+
+spriteset(THIS_ID(spriteset_1)) {
+	tmpl_building_sprite_filename(10, 10, 100, -65, "sprites/graphics/industries/dredgingsite.png")
+}
+
+SPRITELAYOUT_NORMAL(THIS_ID(spritelayout_1), GROUNDSPRITE_WATER, THIS_ID(spriteset_1), 74)
+
+/* *************************************************
+ * Definition of the industry tile and its callbacks
+ * *************************************************/
+
+TILE_DISALLOW_NEARBY_CLASS(tile_nearby_industry,  TILE_CLASS_INDUSTRY, CB_RESULT_LOCATION_DISALLOW, return CB_RESULT_LOCATION_ALLOW)
+TILE_ALLOW_PLAYER         (tile_location_check,                                                             THIS_ID(tile_nearby_industry))
+
+item(FEAT_INDUSTRYTILES, THIS_ID(tile), TILE_DREDGINGSITE_1) {
+	property {
+		substitute:       0;
+		accepted_cargos:  [[ENSP, 8]];
+		land_shape_flags: bitmask(LSF_ONLY_ON_FLAT_LAND);
+	}
+
+	graphics {
+		tile_check: THIS_ID(tile_location_check);
+		THIS_ID(spritelayout_1);
+	}
+}
+
+/* *************************************************
+ * Definition of the industry layouts
+ * *************************************************/
+
+tilelayout tilelayout_dredging_site_1 {
+	0, 0: 255;
+	0, 1: 24;
+	0, 2: 24;
+	0, 4: 255;
+	1, 0: 255;
+	1, 4: 255;
+	2, 0: 255;
+	2, 2: 255;
+	2, 3: THIS_ID(tile);
+	2, 4: 255;
+}
+
+/* *************************************************
+ * Definition of the industry
+ * *************************************************/
+
+#define THIS_STR_EXTRA_SUPPLIES        STR_EXTRA_ENGINEERING_SUPPLIES
+/* availability years - also update available from strings if changing these */
+#define THIS_MIN_YEAR 1852
+
+CHECK_INCOMPATIBLE  (dredging_site, 56, CB_RESULT_LOCATION_DISALLOW, return CB_RESULT_LOCATION_ALLOW)
+CHECK_INCOMPATIBLE  (lime_kiln,     16, CB_RESULT_LOCATION_DISALLOW, THIS_ID(dredging_site))
+CHECK_INCOMPATIBLE  (glass_works,   16, CB_RESULT_LOCATION_DISALLOW, THIS_ID(lime_kiln))
+CHECK_INCOMPATIBLE  (cement_plant,  16, CB_RESULT_LOCATION_DISALLOW, THIS_ID(glass_works))
+CHECK_INCOMPATIBLE  (brick_works,   16, CB_RESULT_LOCATION_DISALLOW, THIS_ID(cement_plant))
+CHECK_COAST_DISTANCE(coastal_distance, 0, param_max_coastal_distance, CB_RESULT_LOCATION_DISALLOW, THIS_ID(brick_works))
+CHECK_FOUNDER       (THIS_ID(coastal_distance))
+
+SWITCH_COLOUR_SCHEME1(THIS_ID(colour))
+
+#include "../templates/produce_primary.pnml"
+#include "../templates/check_primary_production_level.pnml"
+
+#include "../templates/extra_text_primary.pnml"
+
+#include "../templates/check_availability.pnml"
+
+item(FEAT_INDUSTRIES, dredging_site, IND_DREDGINGSITE_ID) {
+	property {
+		substitute: 0;
+		layouts: [
+				tilelayout_dredging_site_1
+			];
+		life_type:              IND_LIFE_TYPE_EXTRACTIVE;
+		closure_msg:            TTD_STR_NEWS_INDUSTRY_CLOSURE_SUPPLY_PROBLEMS;
+		prod_increase_msg:      TTD_STR_NEWS_INDUSTRY_PRODUCTION_INCREASE_GENERAL;
+		prod_decrease_msg:      TTD_STR_NEWS_INDUSTRY_PRODUCTION_DECREASE_GENERAL;
+		new_ind_msg:            TTD_STR_NEWS_INDUSTRY_CONSTRUCTION;
+		name:                   string(STR_IND_DREDGING_SITE);
+		nearby_station_name:    string(STR_STATION, string(STR_TOWN), string(STR_IND_DREDGING_SITE));
+		prod_cargo_types: [SAND, GRVL];
+		accept_cargo_types: [ENSP];
+		prod_multiplier: [13, 13];
+		input_multiplier_1: [0, 0];
+		input_multiplier_2: [0, 0];
+		input_multiplier_3: [0, 0];
+		min_cargo_distr: 5;
+		conflicting_ind_types: [];
+		prob_random: 5;
+		prob_in_game: 3;
+		prospect_chance: 0.75;
+		fund_cost_multiplier: 180;
+		map_colour: 195;
+		remove_cost_multiplier: 0;
+		spec_flags:             bitmask(IND_FLAG_BUILT_ON_WATER, IND_FLAG_AI_CREATES_AIR_AND_SHIP_ROUTES);
+	}
+	graphics {
+		produce_cargo_arrival:   THIS_ID(produce);
+		construction_probability:THIS_ID(check_availability);
+		location_check:          THIS_ID(check_location);
+		monthly_prod_change:     THIS_ID(check_production_level);
+		random_prod_change:      THIS_ID(check_closure);
+		build_prod_change:       randomise_primary_production_on_build;
+		extra_text_industry:     THIS_ID(extra_text);
+		extra_text_fund:         return string(STR_FUND_AVAILABLE_FROM, string(STR_FUND_AVAILABLE_FROM_DATE_DREDGING_SITE));
+		colour:                  THIS_ID(colour);
+	}
+}
+#include "../templates/undefs.pnml"
+
