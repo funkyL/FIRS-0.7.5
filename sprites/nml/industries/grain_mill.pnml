@@ -294,7 +294,7 @@ tilelayout tilelayout_grain_mill_6 {
 CHECK_INCOMPATIBLE  (grain_mill,    0, CB_RESULT_LOCATION_DISALLOW, return CB_RESULT_LOCATION_ALLOW)
 CHECK_INCOMPATIBLE  (brewery,       0, CB_RESULT_LOCATION_DISALLOW, THIS_ID(grain_mill))
 CHECK_INCOMPATIBLE  (arable_farm,   0, CB_RESULT_LOCATION_DISALLOW, THIS_ID(brewery))
-CHECK_TOWN_DISTANCE (town_distance,  0,1000, THIS_ID(arable_farm))
+CHECK_TOWN_DISTANCE (town_distance,  0, 200, THIS_ID(arable_farm))
 CHECK_FOUNDER       (THIS_ID(town_distance))
 
 /** After 1900, windmills only appear during map generation. */
