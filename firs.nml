@@ -11922,7 +11922,7 @@ tilelayout tilelayout_fishing_harbour_5 {
 
 
 
-switch (FEAT_INDUSTRIES, SELF, fishing_harbourfishing_grounds, industry_count(fishing_grounds) * 5 / 4 / industry_clusters != 0 && ( industry_distance(fishing_grounds) < 16 || industry_distance(fishing_grounds) > 60) ) { 1: return CB_RESULT_LOCATION_DISALLOW; return CB_RESULT_LOCATION_ALLOW; }
+switch (FEAT_INDUSTRIES, SELF, fishing_harbourfishing_grounds, industry_count(fishing_grounds) * 5 / 4 / industry_clusters != 0 && ( industry_distance(fishing_grounds) < 0 || industry_distance(fishing_grounds) > 4096) ) { 1: return CB_RESULT_LOCATION_DISALLOW; return CB_RESULT_LOCATION_ALLOW; }
 switch (FEAT_INDUSTRIES, SELF, fishing_harbourcheck_location, ( (extra_callback_info2 == IND_CREATION_FUND) || (extra_callback_info2 == IND_CREATION_PROSPECT) ) ) { 1: return CB_RESULT_LOCATION_ALLOW; fishing_harbourfishing_grounds; }
 
 switch(FEAT_INDUSTRIES, SELF, fishing_harbourcolour, colour) { 0: return 0; 1: return 1; 2: return 2; 3: return 13; 4: return 2; 5: return 5; 6: return 1; 7: return 1; 8: return 0; 9: return 14; 10: return 10; 11: return 11; 12: return 13; 13: return 13; 14: return 14; 15: return 14; return 0; }
@@ -12219,9 +12219,7 @@ item(FEAT_INDUSTRIES, fishing_harbour, 0x1F) {
   fund_cost_multiplier: 150;
   map_colour: 15;
   remove_cost_multiplier: 0;
-  spec_flags: bitmask(IND_FLAG_BUILT_ON_WATER,
-                                  IND_FLAG_BUILT_NEAR_TOWN
-         );
+  spec_flags: bitmask(IND_FLAG_BUILT_ON_WATER);
  }
  graphics {
   produce_cargo_arrival: fishing_harbourproduce;
@@ -12257,7 +12255,7 @@ item(FEAT_INDUSTRIES, fishing_harbour, 0x1F) {
 
 
 /* from availability check */
-# 1051 "sprites/nml/industries/fishing_harbour.pnml" 2
+# 1049 "sprites/nml/industries/fishing_harbour.pnml" 2
 # 49 "<stdin>" 2
 # 1 "sprites/nml/industries/food_market.pnml" 1
 /*
