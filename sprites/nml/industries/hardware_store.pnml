@@ -18,11 +18,7 @@ SPRITELAYOUT_NORMAL_SNOW(THIS_ID(spritelayout_1), GROUNDSPRITE_CONCRETE, GROUNDS
  * Definition of the industry tile and its callbacks
  * *************************************************/
 
-CHECK_ROAD_ADJACENT     (tile_road_adjacent_4, -1, 0, return CB_RESULT_LOCATION_DISALLOW)
-CHECK_ROAD_ADJACENT     (tile_road_adjacent_3, 0, -1, THIS_ID(tile_road_adjacent_4))
-CHECK_ROAD_ADJACENT     (tile_road_adjacent_2, 1, 0,  THIS_ID(tile_road_adjacent_3))
-CHECK_ROAD_ADJACENT     (tile_road_adjacent_1, 0, 1, THIS_ID(tile_road_adjacent_2))
-TILE_ALLOW_PLAYER       (terrain_check, THIS_ID(tile_road_adjacent_1))
+
 
 item(FEAT_INDUSTRYTILES, THIS_ID(tile), TILE_HARDWARESTORE_1) {
 	property {
@@ -32,7 +28,6 @@ item(FEAT_INDUSTRYTILES, THIS_ID(tile), TILE_HARDWARESTORE_1) {
 	}
 
 	graphics {
-		tile_check:  THIS_ID(terrain_check);
 		THIS_ID(spritelayout_1);
 	}
 }
@@ -51,6 +46,10 @@ tilelayout tilelayout_hardware_store_1 {
 
 #include "../templates/check_availability.pnml"
 
+CHECK_INCOMPATIBLE  (petrol_pump, 0, CB_RESULT_LOCATION_DISALLOW, return CB_RESULT_LOCATION_ALLOW)
+CHECK_INCOMPATIBLE  (builders_yard, 0, CB_RESULT_LOCATION_DISALLOW, THIS_ID(petrol_pump))
+CHECK_INCOMPATIBLE  (hardware_store, 0, CB_RESULT_LOCATION_DISALLOW, THIS_ID(builders_yard))
+CHECK_FOUNDER       (THIS_ID(hardware_store))
 
 item(FEAT_INDUSTRIES, hardware_store, IND_HARDWARESTORE_ID) {
 	property {
@@ -76,7 +75,6 @@ item(FEAT_INDUSTRIES, hardware_store, IND_HARDWARESTORE_ID) {
 
 		life_type:              IND_LIFE_TYPE_BLACK_HOLE;
 		conflicting_ind_types:  [hardware_store];
-		spec_flags:             bitmask(IND_FLAG_ONLY_IN_TOWNS);
 		prob_random:            24;
 		prob_in_game:           12;
 		prospect_chance:        0.75;
@@ -86,6 +84,7 @@ item(FEAT_INDUSTRIES, hardware_store, IND_HARDWARESTORE_ID) {
 	}
 	graphics {
 		construction_probability:THIS_ID(check_availability);
+		location_check:          THIS_ID(check_location);
 	}
 }
 

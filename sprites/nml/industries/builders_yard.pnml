@@ -86,7 +86,7 @@ CHECK_HOUSES_NEARBY     (tile_houses_3, 0, -3, THIS_ID(tile_houses_4))
 CHECK_HOUSES_NEARBY     (tile_houses_2, 3, 0,  THIS_ID(tile_houses_3))
 CHECK_HOUSES_NEARBY     (tile_houses_1, 0, 3, THIS_ID(tile_houses_2))
 TILE_DISALLOW_NEARBY_CLASS(nearby_industry, TILE_CLASS_INDUSTRY, CB_RESULT_LOCATION_DISALLOW, THIS_ID(tile_houses_1))
-TILE_ALLOW_PLAYER         (terrain_check,                                                           THIS_ID(nearby_industry))
+TILE_ALLOW_PLAYER         (terrain_check, THIS_ID(nearby_industry))
 
 item(FEAT_INDUSTRYTILES, THIS_ID(tile), TILE_BUILDERSYARD_1) {
 	property {
@@ -96,7 +96,6 @@ item(FEAT_INDUSTRYTILES, THIS_ID(tile), TILE_BUILDERSYARD_1) {
 	}
 
 	graphics {
-		tile_check:  THIS_ID(terrain_check);
 		THIS_ID(ground_switch);
 	}
 }

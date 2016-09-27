@@ -5681,7 +5681,6 @@ item(FEAT_INDUSTRYTILES, builders_yardtile, 164) {
  }
 
  graphics {
-  tile_check: builders_yardterrain_check;
   builders_yardground_switch;
  }
 }
@@ -5741,7 +5740,7 @@ switch (FEAT_INDUSTRIES, SELF, builders_yardcheck_availability, current_date) {
  date(0,1,1) .. date(5000000,12,31): builders_yardavailable_game_mode;
  return CB_RESULT_IND_NO_CONSTRUCTION;
 }
-# 123 "sprites/nml/industries/builders_yard.pnml" 2
+# 122 "sprites/nml/industries/builders_yard.pnml" 2
 
 item(FEAT_INDUSTRIES, builders_yard, 0x3F) {
  property {
@@ -5801,7 +5800,7 @@ item(FEAT_INDUSTRIES, builders_yard, 0x3F) {
 
 
 /* from availability check */
-# 158 "sprites/nml/industries/builders_yard.pnml" 2
+# 157 "sprites/nml/industries/builders_yard.pnml" 2
 # 38 "<stdin>" 2
 # 1 "sprites/nml/industries/cement_plant.pnml" 1
 /*
@@ -12524,7 +12523,6 @@ item(FEAT_INDUSTRIES, food_market, 0x3B) {
 
   life_type: IND_LIFE_TYPE_BLACK_HOLE;
   conflicting_ind_types: [food_market];
-  spec_flags: bitmask(IND_FLAG_ONLY_IN_TOWNS);
   prob_random: 24;
   prob_in_game: 12;
   prospect_chance: 0.75;
@@ -12561,7 +12559,7 @@ item(FEAT_INDUSTRIES, food_market, 0x3B) {
 
 
 /* from availability check */
-# 118 "sprites/nml/industries/food_market.pnml" 2
+# 117 "sprites/nml/industries/food_market.pnml" 2
 # 50 "<stdin>" 2
 # 1 "sprites/nml/industries/forest.pnml" 1
 /*
@@ -25232,11 +25230,7 @@ spritelayout hardware_storespritelayout_1 { ground { sprite: LOAD_TEMP(0) != 0 ?
  * Definition of the industry tile and its callbacks
  * *************************************************/
 
-switch (FEAT_INDUSTRYTILES, SELF, hardware_storetile_road_adjacent_4, nearby_tile_class(-1, 0)) { TILE_CLASS_ROAD: return CB_RESULT_LOCATION_ALLOW; return CB_RESULT_LOCATION_DISALLOW; }
-switch (FEAT_INDUSTRYTILES, SELF, hardware_storetile_road_adjacent_3, nearby_tile_class(0, -1)) { TILE_CLASS_ROAD: return CB_RESULT_LOCATION_ALLOW; hardware_storetile_road_adjacent_4; }
-switch (FEAT_INDUSTRYTILES, SELF, hardware_storetile_road_adjacent_2, nearby_tile_class(1, 0)) { TILE_CLASS_ROAD: return CB_RESULT_LOCATION_ALLOW; hardware_storetile_road_adjacent_3; }
-switch (FEAT_INDUSTRYTILES, SELF, hardware_storetile_road_adjacent_1, nearby_tile_class(0, 1)) { TILE_CLASS_ROAD: return CB_RESULT_LOCATION_ALLOW; hardware_storetile_road_adjacent_2; }
-switch (FEAT_INDUSTRYTILES, PARENT, hardware_storeterrain_check, ( (((extra_callback_info2 & 0xFF00) >> 8) == IND_CREATION_FUND) || (((extra_callback_info2 & 0xFF00) >> 8) == IND_CREATION_PROSPECT) ) ) { 1: return CB_RESULT_LOCATION_ALLOW; hardware_storetile_road_adjacent_1; }
+
 
 item(FEAT_INDUSTRYTILES, hardware_storetile, 218) {
  property {
@@ -25246,7 +25240,6 @@ item(FEAT_INDUSTRYTILES, hardware_storetile, 218) {
  }
 
  graphics {
-  tile_check: hardware_storeterrain_check;
   hardware_storespritelayout_1;
  }
 }
@@ -25300,8 +25293,12 @@ switch (FEAT_INDUSTRIES, SELF, hardware_storecheck_availability, current_date) {
  date(0,1,1) .. date(5000000,12,31): hardware_storeavailable_game_mode;
  return CB_RESULT_IND_NO_CONSTRUCTION;
 }
-# 53 "sprites/nml/industries/hardware_store.pnml" 2
+# 48 "sprites/nml/industries/hardware_store.pnml" 2
 
+switch (FEAT_INDUSTRIES, SELF, hardware_storepetrol_pump, industry_distance(petrol_pump)) { 0 .. 0: return CB_RESULT_LOCATION_DISALLOW; return CB_RESULT_LOCATION_ALLOW; }
+switch (FEAT_INDUSTRIES, SELF, hardware_storebuilders_yard, industry_distance(builders_yard)) { 0 .. 0: return CB_RESULT_LOCATION_DISALLOW; hardware_storepetrol_pump; }
+switch (FEAT_INDUSTRIES, SELF, hardware_storehardware_store, industry_distance(hardware_store)) { 0 .. 0: return CB_RESULT_LOCATION_DISALLOW; hardware_storebuilders_yard; }
+switch (FEAT_INDUSTRIES, SELF, hardware_storecheck_location, ( (extra_callback_info2 == IND_CREATION_FUND) || (extra_callback_info2 == IND_CREATION_PROSPECT) ) ) { 1: return CB_RESULT_LOCATION_ALLOW; hardware_storehardware_store; }
 
 item(FEAT_INDUSTRIES, hardware_store, 0x39) {
  property {
@@ -25327,7 +25324,6 @@ item(FEAT_INDUSTRIES, hardware_store, 0x39) {
 
   life_type: IND_LIFE_TYPE_BLACK_HOLE;
   conflicting_ind_types: [hardware_store];
-  spec_flags: bitmask(IND_FLAG_ONLY_IN_TOWNS);
   prob_random: 24;
   prob_in_game: 12;
   prospect_chance: 0.75;
@@ -25337,6 +25333,7 @@ item(FEAT_INDUSTRIES, hardware_store, 0x39) {
  }
  graphics {
   construction_probability:hardware_storecheck_availability;
+  location_check: hardware_storecheck_location;
  }
 }
 
@@ -25364,7 +25361,7 @@ item(FEAT_INDUSTRIES, hardware_store, 0x39) {
 
 
 /* from availability check */
-# 92 "sprites/nml/industries/hardware_store.pnml" 2
+# 91 "sprites/nml/industries/hardware_store.pnml" 2
 # 57 "<stdin>" 2
 # 1 "sprites/nml/industries/hotel.pnml" 1
 /*
@@ -36293,7 +36290,6 @@ item(FEAT_INDUSTRIES, smithy_forge, 0x06) {
   fund_cost_multiplier: 63;
   map_colour: 133;
   remove_cost_multiplier: 0;
-  spec_flags: bitmask(IND_FLAG_ONLY_IN_TOWNS);
  }
  graphics {
   produce_cargo_arrival: smithy_forgeproduce;
@@ -36330,7 +36326,7 @@ item(FEAT_INDUSTRIES, smithy_forge, 0x06) {
 
 
 /* from availability check */
-# 156 "sprites/nml/industries/smithy_forge.pnml" 2
+# 155 "sprites/nml/industries/smithy_forge.pnml" 2
 # 83 "<stdin>" 2
 # 1 "sprites/nml/industries/steelmill.pnml" 1
 /*

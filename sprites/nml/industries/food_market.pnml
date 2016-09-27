@@ -102,7 +102,6 @@ item(FEAT_INDUSTRIES, food_market, IND_FOODMARKET_ID) {
 
 		life_type:              IND_LIFE_TYPE_BLACK_HOLE;
 		conflicting_ind_types:  [food_market];
-		spec_flags:             bitmask(IND_FLAG_ONLY_IN_TOWNS);
 		prob_random:            24;
 		prob_in_game:           12;
 		prospect_chance:        0.75;
