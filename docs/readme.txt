@@ -1,5 +1,5 @@
 ====================================
-funkyL's FIRS variation r2815M ReadMe
+funkyL's FIRS variation r ReadMe
 ====================================
 A full industry set with lots of new industries and lots of new cargos.
 
@@ -229,10 +229,10 @@ either 'make', 'make install', or 'make bundle_zip'. There's more
 options, but these are probably sufficient for you to know.
 
 =======
-GRF Name : funkyL's FIRS variation r2815M
-GRF ID   : F9 25 00 05
+GRF Name : funkyL's FIRS variation r
+GRF ID   : F2 25 00 05
 
-This version of FIRS is created using repository version 2815
+This version of FIRS is created using repository version 
 
 
 -------

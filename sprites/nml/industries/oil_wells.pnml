@@ -207,7 +207,7 @@ item(FEAT_INDUSTRIES, oil_wells, IND_OILWELLS_ID) {
 		name: 18445;
 		prod_cargo_types: [OIL_];
 		accept_cargo_types: [ENSP];
-		prod_multiplier: [28];
+		prod_multiplier: [7];
 		conflicting_ind_types: [];
 		prob_random: 5;
 		prob_in_game: 3;
